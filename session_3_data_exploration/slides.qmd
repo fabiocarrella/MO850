@@ -1,0 +1,163 @@
+---
+title: "MO850 – Tópicos Avançados em Ciência da Computação I"
+format:
+  revealjs:
+    scrollable: true
+    incremental: true
+    width: 1500
+    slide-number: c/t
+editor: visual
+---
+
+## Requirements
+
+R:<https://cran.r-project.org/>
+
+RStudio (IDE): <https://posit.co/downloads/>
+
+## R Crash Course {.incremental}
+
+-   GUI
+-   Projects
+-   Variables
+-   Functions
+-   Installing and loading packages
+-   the "tidyverse"
+-   importing datasets
+
+## Data exploration
+
+Once the dataset is imported, we can `View` it.
+
+::: fragment
+```{r}
+#| echo: true
+library(readr)
+raw_data <- read_csv("data/timebin_sampled_telegram.csv")
+head(raw_data)
+```
+:::
+
+## Introduction to Quanteda
+
+`quanteda` is an R package for managing and analyzing text^\[1\]^
+
+::: fragment
+Beyond the base package, `quanteda` offers a plethora of specialized extensions, for example:
+
+-   `quanteda.textstats`: Metrics for similarity, readability, lexical diversity, and more
+-   `quanteda.textplots`: Plotting and visualising text data
+-   `quanteda.dictionaries`: Dictionaries for word counting applications
+-   `quanteda.sentiment`: Tools for advanced dictionary-based sentiment analysis
+:::
+
+::: fragment
+`quanteda` is also [well documented](https://tutorials.quanteda.io/).
+:::
+
+## The quanteda pipeline
+
+The common `quanteda` pipeline is: corpus -\> tokens -\> DFM
+
+::: fragment
+Tokenization = splitting a long text into smaller pieces (i.e., tokens).
+:::
+
+::: fragment
+Different levels of tokenization:
+
+-   words
+-   stems
+-   lemmas
+-   n-grams
+-   shingles
+:::
+
+::: fragment
+Document-feature matrix (DFM): a table where each row is a document (i.e. a text in our corpus) and each column is a feature (usually a token). Values represent how many times the feature appears in a document *d*
+:::
+
+## Open vocabulary word counting
+
+Open vocabulary vs. dictionaries = bottom-up vs top-down
+
+::: fragment
+It all starts with raw frequency counts.
+:::
+
+## Text normalization
+
+Occurrence threshold: removing features below or above a term or doc frequency threshold.
+
+-   cleaner results
+-   threshold are hard to justify
+
+::: fragment
+Stopwords: high-frequency words that carry little **semantic** meaning (e.g., "and", "or"). We can create custom stopwords.
+
+-   intuitive
+-   remove potential important information^\[2\]^
+:::
+
+## Transforming word counts: Boolean tokenization
+
+Boolean (binary) tokenization: sometimes first occurrence is more important than frequency.
+
+-   removes non-independence of observations
+-   devalues common tokens
+-   text length confound
+
+## Transforming word counts: Relative tokenization
+
+Relative tokenization (or frequency): word counts / total words
+
+-   intuitive appeal
+-   discounts longer texts
+-   does not control for text length
+-   not normally distributed
+
+## Transforming word counts: Term frequency-inverse document frequency (TF-IDF)
+
+TF-IDF: How representative is that token of the particular features of that document as opposed to other documents?
+
+::: fragment
+$$TF(t,d) = \frac{\text{number of times } t \text{ appears in } d}{\text{total number of words in } d}$$
+
+$$IDF(t,D) = \log \frac{\text{total number of documents in } D}{\text{number of documents containing } t}$$
+:::
+
+-   computational efficient
+-   discount uninformative tokens with no information loss
+-   difficult to interpret directly
+-   we might be interested in common tokens across docs
+
+## Comparing texts with "keyness"
+
+Frequency ratios are statistically misleading
+
+::: fragment
+Keyness helps us comparing groups.
+:::
+
+::: fragment
+However, we can also compare continuous variables (e.g., measures)
+:::
+
+## Topic Modeling: Latent Dirichlet Allocation (LDA)
+
+Unsupervised method to discover latent *topics* in a corpus — no predefined groups needed.
+
+$$P(w | d) = \sum_{k=1}^{K} P(w | topic_k) \cdot P(topic_k | d)$$
+
+::: fragment
+Two key ideas:
+
+-   A **topic** is a probability distribution over words
+-   A **document** is a mixture of topics
+:::
+
+## References
+
+1)  Benoit, Kenneth, Kohei Watanabe, Haiyan Wang, Paul Nulty, Adam Obeng, Stefan Müller, and Akitaka Matsuo. 2018. “quanteda: An R package for the quantitative analysis of textual data”. Journal of Open Source Software 3(30), 774. https://doi.org/10.21105/joss.00774.
+
+2)  Mehl, M. R., Gosling, S. D., & Pennebaker, J. W. (2006). Personality in its natural habitat: Manifestations and implicit folk theories of personality in daily life. Journal of Personality and Social Psychology, 90 5, 862–877. https://api.semanticscholar.org/CorpusID:2932332
