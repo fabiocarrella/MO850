@@ -1,0 +1,122 @@
+---
+title: "MO850 – Tópicos Avançados em Ciência da Computação I"
+format:
+  revealjs:
+    scrollable: true
+    incremental: true
+    width: 1500
+editor: visual
+---
+
+## What is a dictionary?
+
+-   A dictionary is a list of words (or other tokens) associated with a given construct.
+
+-   Intuitive way to measure construct in texts.
+
+-   Pros and cons of dictionaries?
+
+## Types of dictionaries
+
+-   Crowdsourced dictionaries: built from large-scale online participant responses
+-   Examples: NRC Word-Emotion Association Lexicon^\[1\]^, NRC VAD^\[2\]^, Concreteness dictionary^\[3\]^, Age of acquisition^\[4\]^.
+-   Expert-generated dictionaries: developed by specialists to account for context and multiple meanings.
+-   Examples: LIWC^\[5\]^, MEmoLon\* ^\[6\]^, "Honesty" dictionaries\* ^\[7\]^
+-   Corpus-based dictionaries: derived from full texts that have been rated by human judges.
+-   Examples: Dictionary for SA of online news^\[8\]^, DepecheMood^\[9\]^
+-   Thesaurus-based dictionaries: mining synonym relationships from a lexical database.
+-   Examples: WordNet Affect^\[10\]^
+
+## Sources of dictionaries (and more)
+
+-   English resources:
+
+    -   https://saifmohammad.com/WebPages/lexicons.html
+  
+    -   https://www.sciencedirect.com/topics/psychology/emotion-lexica
+    
+    -   https://github.com/niderhoff/nlp-datasets
+  
+    -   https://github.com/nlpfromscratch/nlp-llms-resources
+
+-   Non-English resources:
+
+    -   https://github.com/keon/awesome-nlp
+    
+    -   https://github.com/ajdavidl/Portuguese-NLP
+    
+    -   https://portulanclarin.net/
+
+## DBA with Quanteda
+
+Steps:
+
+-   create corpus
+-   extract tokens (with possible cleaning)
+-   generate DFM
+-   use `dfm_lookup(dictionary)` on the DFM
+-   check correlations / compare groups
+
+## Polarity
+
+-   We oppose a construct of interest with its opposite
+
+-   Helps with word-construct association
+
+## Lexical norms
+
+-   Words represent the construct or its opposite on a scale.
+
+-   a.k.a. "valence" or "lexical affinity" or "lexical association"
+
+-   Resulting scores are easier to model
+
+## LIWC
+
+-   Linguistic Inquiry and Word Count (LIWC) counts words belonging to psychologically meaningful categories (e.g. emotions, cognition, social relationships)
+
+-   Paid access but older dictionaries are free
+
+-   Results are expressed as a percentage of total words in a document
+
+-   Possible to simulate with `quanteda.dictionaries::liwcalike()`
+
+## Bottom-up dictionary
+
+-   We can use datasets to generate dictionaries
+
+-   Start a `quanteda` pipeline, and calculate keyness with PMI
+
+-   Caution: PMI is very sensitive to rare words
+
+## Activity
+
+-   What is our construct of interest?
+
+-   Scan the QR code and add keywords to our dictionary
+
+-   Was it easy?
+
+-   Pros and cons of dictionaries?
+
+## References
+
+1) Mohammad, S. M., & Turney, P. D. (2013). Crowdsourcing a word-emotion association lexicon. Computational Intelligence, 29(3), 436–465.
+
+2) Mohammad, S. M. (2018a). Obtaining reliable human ratings of valence, arousal, and dominance for 20,000 english words. Proceedings of the Annual Conference of the Association for Computational Linguistics (ACL).
+
+3) Brysbaert, M., Warriner, A. B., & Kuperman, V. (2014). Concreteness ratings for 40 thousand generally known english word lemmas. Behavior Research Methods, 46, 904–911.
+
+4) Kuperman, V., Stadthagen-Gonzalez, H., & Brysbaert, M. (2012). Age-of-acquisition ratings for 30,000 english words. Behavior Research Methods, 44, 978–990.
+
+5) Boyd, R., Ashokkumar, A., Seraj, S., & Pennebaker, J. (2022). The development and psychometric properties of LIWC-22. https://doi.org/10.13140/RG.2.2.23890.43205
+
+6) Buechel, S., Rücker, S., & Hahn, U. (2020, July). Learning and evaluating emotion lexicons for 91 languages. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics (pp. 1202-1217).
+
+7) Lasser, J., Aroyehun, S. T., Carrella, F., Simchon, A., Garcia, D., & Lewandowsky, S. (2023). From alternative conceptions of honesty to alternative facts in communications by US politicians. Nature human behaviour, 7(12), 2140-2151.
+
+8) Strapparava, C., & Mihalcea, R. (2007). SemEval-2007 task 14: Affective text. In E. Agirre, L. Màrquez, & R. Wicentowski (Eds.), Proceedings of the fourth international workshop on semantic evaluations (SemEval-2007) (pp. 70–74). Association for Computational Linguistics. https://aclanthology.org/S07-1013
+
+9) Araque, O., Gatti, L., Staiano, J., & Guerini, M. (2018). DepecheMood++: A bilingual emotion lexicon built through simple yet powerful techniques. CoRR, abs/1810.03660. http://arxiv.org/abs/1810.03660
+
+10) Strapparava, C., & Valitutti, A. (2004). Wordnet affect: An affective extension of wordnet. Lrec, 4, 40.
