@@ -17,9 +17,9 @@ summary(raw_data)
 filtered_data <- raw_data %>% 
   filter(!is.na(text_content))
 
-filtered_data <- filtered_data %>% 
-  mutate(text_WC = str_count(text_content, "\\S+")) %>% 
-  filter(text_WC > 5)
+#filtered_data <- filtered_data %>% 
+#  mutate(text_WC = str_count(text_content, "\\S+")) %>% 
+#  filter(text_WC > 5)
 
 
 # introduce Quanteda (#6)
@@ -36,8 +36,12 @@ toks <- tokens(telegram_corpus,
                remove_symbols = T
                )
 
-#toks <- toks %>% 
-#  tokens_select(min_nchar = 3)
+toks <- toks %>% 
+  tokens_select(min_nchar = 3)
+
+toks <- tokens_remove(toks, 
+                      pattern = "^[a-f0-9]{16,}$", 
+                      valuetype = "regex")
 
 print(toks)
 
@@ -156,10 +160,10 @@ vax_keyness  %>%
   # only words with significant difference to p < .001
   filter(p < .001) %>% 
   arrange(desc(abs(G2))) %>% 
-  filter(row_number() <= 50 | row_number() >= n() - 49) %>%
+  filter(row_number() <= 30 | row_number() >= n() - 30) %>%
   # plot
   ggplot(aes(label = feature, 
-             size = abs(G2), 
+             size = log(abs(G2)), 
              color = G2 > 0,
              angle_group = G2 > 0)) +
   geom_text_wordcloud_area(eccentricity = 1) + 
@@ -200,6 +204,7 @@ head(lda_model$theta)
 # connect docs to topics
 topic_labels <- apply(terms(lda_model, 5), 2, paste, collapse = "_")
 filtered_data <- docvars(lda_model$data)
+filtered_data$text_content <- as.character(telegram_corpus)
 filtered_data$topic <- topics(lda_model)
 filtered_data$topic_label <- topic_labels[filtered_data$topic]
 
