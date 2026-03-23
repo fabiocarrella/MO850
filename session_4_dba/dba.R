@@ -311,14 +311,15 @@ fake_df <- dfm %>%
   ) %>%
   mutate(wc = ntoken(dfm))
 
-ggplot(fake_df, aes(
-  x = misinformation,
-  y = fake
-)) +
-  geom_boxplot() +
+fake_df %>%
+  mutate(has_fake = fake > 0) %>%
+  group_by(misinformation) %>%
+  summarise(prop = mean(has_fake)) %>%
+  ggplot(aes(x = misinformation, y = prop, fill = misinformation)) +
+  geom_col() +
   theme_bw() +
-  theme(text = element_text(size = 18)) +
-  labs(x = "", y = "")
+  theme(text = element_text(size = 18), legend.position = "none") +
+  labs(x = "", y = "Proportion with fake keywords")
 
 m4 <- glmmTMB(fake ~ misinformation + wc,
   offset = log(wc),
@@ -361,7 +362,7 @@ our_dict_df %>%
 
 # expand keywords
 # download from portulanclarin
-rdf <- rdf_parse("session_4_dba/data/wnet/mwnpt-rdf.xml", format = "ntriples")
+rdf <- rdf_parse("session_4_dba/data/mwnpt-rdf.xml", format = "ntriples")
 
 # first get all entries and their written forms
 query_entries <- "

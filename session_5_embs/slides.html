@@ -27,6 +27,72 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="slides_files/libs/revealjs/dist/theme/quarto-f563837468303362081e247dddd440d0.css">
   <link href="slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -137,112 +203,357 @@
 <h2>Activity</h2>
 
 <img data-src="qr-code.png" class="r-stretch"></section>
-<section id="what-is-a-dictionary" class="slide level2">
-<h2>What is a dictionary?</h2>
+<section id="what-are-word-embeddings" class="slide level2">
+<h2>What are (word) embeddings?</h2>
+<div class="fragment">
+<p>Word embeddings are dense vector representations of words that capture semantic meaning.</p>
+</div>
+<div class="fragment">
+<p>Words with similar meanings are placed close to each other in a multi-dimensional space.</p>
+</div>
+</section>
+<section id="bow-vs-embeddings" class="slide level2">
+<h2>BOW vs Embeddings</h2>
+<p>Bag-of-Words:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a href=""></a>cat = [1, 0, 0, 0, 0, ..., 0]  (10,000 dimensions)</span>
+<span id="cb1-2"><a href=""></a>dog = [0, 1, 0, 0, 0, ..., 0]</span>
+<span id="cb1-3"><a href=""></a>car = [0, 0, 1, 0, 0, ..., 0]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li class="fragment"><p>A dictionary is a list of words (or other tokens) associated with a given construct.</p></li>
-<li class="fragment"><p>Intuitive way to measure construct in texts.</p></li>
-<li class="fragment"><p>Pros and cons of dictionaries?</p></li>
+<li class="fragment"><p>Each word is an isolated symbol, no “meaning” encoded</p></li>
+<li class="fragment"><p>“cat” and “dog” are just as different as “cat” and “car”</p></li>
+<li class="fragment"><p>Sparse vectors: thousands of dimensions, mostly zeros</p></li>
+<li class="fragment"><p>Dimensions = vocabulary size</p></li>
 </ul>
 </section>
-<section id="types-of-dictionaries" class="slide level2">
-<h2>Types of dictionaries</h2>
+<section id="bow-vs-embeddings-1" class="slide level2">
+<h2>BOW vs Embeddings</h2>
+<div class="fragment">
+<p>How do we associate a word with a meaning (e.g., a cognitive process, an emotion)?</p>
+</div>
+<div class="fragment">
+<p>Core idea: Words appearing in similar contexts have similar meanings.</p>
+<blockquote>
+<p>“You shall know a word by the company it keeps” — J.R. Firth (1957)</p>
+</blockquote>
+</div>
+<div class="fragment">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Similarity comes from shared context, not co-occurrence</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>Distributional Semantic Models (DSMs) = algorithms that learn the meanings of tokens (or at least the relations between their meanings) from patterns of contextual co-occurrence</p>
+</div>
+</section>
+<section id="why-embeddings-matter" class="slide level2">
+<h2>Why embeddings matter</h2>
+<div class="fragment">
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a href=""></a>cat  = [0.2, -0.4, 0.7, ..., 0.1]  (300 dimensions)  </span>
+<span id="cb2-2"><a href=""></a>dog  = [0.3, -0.5, 0.8, ..., 0.2]  (similar to cat!)  </span>
+<span id="cb2-3"><a href=""></a>car  = [-0.1, 0.6, -0.3, ..., 0.4] (different from cat/dog) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<p>Advantages:</p>
 <ul>
-<li class="fragment">Crowdsourced dictionaries: built from large-scale online participant responses</li>
-<li class="fragment">Examples: NRC Word-Emotion Association Lexicon<sup>[1]</sup>, NRC VAD<sup>[2]</sup>, Concreteness dictionary<sup>[3]</sup>, Age of acquisition<sup>[4]</sup>.</li>
-<li class="fragment">Expert-generated dictionaries: developed by specialists to account for context and multiple meanings.</li>
-<li class="fragment">Examples: LIWC<sup>[5]</sup>, MEmoLon* <sup>[6]</sup>, “Honesty” dictionaries* <sup>[7]</sup></li>
-<li class="fragment">Corpus-based dictionaries: derived from full texts that have been rated by human judges.</li>
-<li class="fragment">Examples: Dictionary for SA of online news<sup>[8]</sup>, DepecheMood<sup>[9]</sup></li>
-<li class="fragment">Thesaurus-based dictionaries: mining synonym relationships from a lexical database.</li>
-<li class="fragment">Examples: WordNet Affect<sup>[10]</sup></li>
+<li class="fragment"><p>Semantic similarity captured</p></li>
+<li class="fragment"><p>Dense, efficient representation</p></li>
+<li class="fragment"><p>Fixed dimensions (typically 256-4096)</p></li>
+<li class="fragment"><p>Mathematical operations meaningful</p></li>
+</ul>
+</div>
+</section>
+<section id="applications" class="slide level2">
+<h2>Applications</h2>
+<div class="fragment">
+<p>Real-World Applications</p>
+<ul>
+<li class="fragment"><p>Search engines &amp; information retrieval — go beyond keyword matching</p></li>
+<li class="fragment"><p>Machine translation — map meaning across languages</p></li>
+<li class="fragment"><p>Sentiment analysis &amp; text classification — richer features than raw words</p></li>
+<li class="fragment"><p>Question answering &amp; recommendation systems — match by meaning, not just form</p></li>
+<li class="fragment"><p>Named entity recognition — recognize entities in context</p></li>
+</ul>
+</div>
+<div class="fragment">
+<p>Linguistic Research</p>
+<ul>
+<li class="fragment"><p>Semantic change — track how word meanings shift across decades</p></li>
+<li class="fragment"><p>Bias detection — uncover implicit associations (e.g.&nbsp;gender, race)</p></li>
+<li class="fragment"><p>Metaphor analysis — identify non-literal and cross-domain mappings</p></li>
+<li class="fragment"><p>Construct representation — extract constructs from word vectors</p></li>
+</ul>
+</div>
+</section>
+<section id="navigating-the-vector-space" class="slide level2">
+<h2>Navigating the vector space</h2>
+<div class="fragment">
+<p>Embeddings represent words as vectors in high-dimensional space where:</p>
+</div>
+<ul>
+<li class="fragment">Each dimension captures some aspect of meaning</li>
+<li class="fragment">Similar words cluster together</li>
+<li class="fragment">Relationships are preserved geometrically</li>
+</ul>
+<div class="fragment">
+<p>We can quantify similarity between vectors:</p>
+<dl>
+<dt class="fragment">Euclidean distance</dt>
+<dd class="fragment">
+Straight-line distance
+</dd>
+<dd class="fragment">
+Low = similar
+</dd>
+<dt class="fragment">Cosine similarity</dt>
+<dd class="fragment">
+Angle between vectors
+</dd>
+<dd class="fragment">
+1 = identical, -1 = opposite
+</dd>
+<dt class="fragment">Dot product</dt>
+<dd class="fragment">
+Angle + magnitude
+</dd>
+<dd class="fragment">
+Higher = more similar and prominent
+</dd>
+</dl>
+</div>
+</section>
+<section id="types-of-word-embeddings" class="slide level2">
+<h2>Types of word embeddings</h2>
+<div class="fragment">
+<p>Count-based methods (e.g., LSA, HAL)</p>
+</div>
+<div class="fragment">
+<p>DFM -&gt; Find patterns of co-occurrence -&gt; Reduce dimensionality</p>
+</div>
+<div class="fragment">
+<p>Advantages:</p>
+</div>
+<ul>
+<li class="fragment"><p>Straightforward to understand</p></li>
+<li class="fragment"><p>Interpretable dimensions</p></li>
+<li class="fragment"><p>Good for small datasets</p></li>
+</ul>
+<div class="fragment">
+<p>Disadvantages:</p>
+</div>
+<ul>
+<li class="fragment"><p>Uses documents to define word contexts</p></li>
+<li class="fragment"><p>Assumes linearity and normality</p></li>
+<li class="fragment"><p>Less effective than modern methods</p></li>
+<li class="fragment"><p>Same problems with raw word counts</p></li>
 </ul>
 </section>
-<section id="sources-of-dictionaries-and-more" class="slide level2">
-<h2>Sources of dictionaries (and more)</h2>
+<section id="types-of-word-embeddings-1" class="slide level2">
+<h2>Types of word embeddings</h2>
+<div class="fragment">
+<p>Prediction-Based Methods (e.g., GloVe<sup>[1]</sup>, word2vec<sup>[2]</sup>, fastText<sup>[3]</sup>)</p>
+<p>The model weights are the embeddings</p>
+</div>
+<div class="fragment">
+<p>Two main architectures:</p>
+</div>
+<dl>
+<dt class="fragment">CBOW</dt>
+<dd class="fragment">
+<p>Input: Context words</p>
+</dd>
+<dd class="fragment">
+<p>Output: Target word</p>
+</dd>
+<dd class="fragment">
+<p>Fast training</p>
+</dd>
+<dd class="fragment">
+<p>Better for frequent words</p>
+</dd>
+<dt class="fragment">Skip-gram</dt>
+<dd class="fragment">
+<p>Input: Target word</p>
+</dd>
+<dd class="fragment">
+<p>Output: Context words</p>
+</dd>
+<dd class="fragment">
+<p>Slower training</p>
+</dd>
+<dd class="fragment">
+<p>Better for rare words and small datasets</p>
+</dd>
+</dl>
+</section>
+<section id="types-of-decontextualized-embeddings" class="slide level2">
+<h2>Types of decontextualized embeddings</h2>
+<div class="fragment">
+<p>Word2vec:</p>
+</div>
 <ul>
-<li class="fragment"><p>English resources:</p>
+<li class="fragment"><p>efficient</p></li>
+<li class="fragment"><p>two vectors per word</p></li>
+<li class="fragment"><p>struggles with polisemy</p></li>
+<li class="fragment"><p>works better with English</p></li>
+</ul>
+<div class="fragment">
+<p>GloVe:</p>
+</div>
 <ul>
-<li class="fragment"><p>https://saifmohammad.com/WebPages/lexicons.html</p></li>
-<li class="fragment"><p>https://www.sciencedirect.com/topics/psychology/emotion-lexica</p></li>
-<li class="fragment"><p>https://github.com/niderhoff/nlp-datasets</p></li>
-<li class="fragment"><p>https://github.com/nlpfromscratch/nlp-llms-resources</p></li>
-</ul></li>
-<li class="fragment"><p>Non-English resources:</p>
+<li class="fragment"><p>better trained models than Word2Vec</p></li>
+<li class="fragment"><p>same issues than Word2vec</p></li>
+</ul>
+<div class="fragment">
+<p>FastText:</p>
+</div>
 <ul>
-<li class="fragment"><p>https://github.com/keon/awesome-nlp</p></li>
-<li class="fragment"><p>https://github.com/ajdavidl/Portuguese-NLP</p></li>
-<li class="fragment"><p>https://portulanclarin.net/</p></li>
-</ul></li>
+<li class="fragment"><p>works with shingles rather than words</p></li>
+<li class="fragment"><p>can infer embeddings of “absent” words</p></li>
+<li class="fragment"><p>more complex (larger models)</p></li>
 </ul>
 </section>
-<section id="dba-with-quanteda" class="slide level2">
-<h2>DBA with Quanteda</h2>
-<p>Steps:</p>
-<ul>
-<li class="fragment">create corpus</li>
-<li class="fragment">extract tokens (with possible cleaning)</li>
-<li class="fragment">generate DFM</li>
-<li class="fragment">use <code>dfm_lookup(dictionary)</code> on the DFM</li>
-<li class="fragment">check correlations / compare groups</li>
-</ul>
-</section>
-<section id="polarity" class="slide level2">
-<h2>Polarity</h2>
-<ul>
-<li class="fragment"><p>We oppose a construct of interest with its opposite</p></li>
-<li class="fragment"><p>Helps with word-construct association</p></li>
-</ul>
-</section>
-<section id="lexical-norms" class="slide level2">
-<h2>Lexical norms</h2>
-<ul>
-<li class="fragment"><p>Words represent the construct or its opposite on a scale.</p></li>
-<li class="fragment"><p>a.k.a. “valence” or “lexical affinity” or “lexical association”</p></li>
-<li class="fragment"><p>Resulting scores are easier to model</p></li>
-</ul>
-</section>
-<section id="liwc" class="slide level2">
-<h2>LIWC</h2>
-<ul>
-<li class="fragment"><p>Linguistic Inquiry and Word Count (LIWC) counts words belonging to psychologically meaningful categories (e.g.&nbsp;emotions, cognition, social relationships)</p></li>
-<li class="fragment"><p>Paid access but older dictionaries are free</p></li>
-<li class="fragment"><p>Results are expressed as a percentage of total words in a document</p></li>
-<li class="fragment"><p>Possible to simulate with <code>quanteda.dictionaries::liwcalike()</code></p></li>
-</ul>
-</section>
-<section id="bottom-up-dictionary" class="slide level2">
-<h2>Bottom-up dictionary</h2>
-<ul>
-<li class="fragment"><p>We can use datasets to generate dictionaries</p></li>
-<li class="fragment"><p>Start a <code>quanteda</code> pipeline, and calculate keyness with PMI</p></li>
-<li class="fragment"><p>Caution: PMI is very sensitive to rare words</p></li>
-</ul>
-</section>
-<section id="activity-1" class="slide level2">
-<h2>Activity</h2>
-<ul>
-<li class="fragment"><p>What is our construct of interest?</p></li>
-<li class="fragment"><p>Scan the QR code and add keywords to our dictionary</p></li>
-<li class="fragment"><p>Was it easy?</p></li>
-<li class="fragment"><p>Pros and cons of dictionaries?</p></li>
-</ul>
-</section>
-<section id="references" class="slide level2 scrollable">
-<h2>References</h2>
+<section id="types-of-word-embeddings-2" class="slide level2 scrollable">
+<h2>Types of word embeddings</h2>
+<div class="fragment">
+<p>Contextualized embeddings (e.g., BERT<sup>[1]</sup>, RoBERTa<sup>[2]</sup>, SBERT<sup>[3]</sup>)</p>
+<p>Different embeddings for different contexts (with transformers)</p>
+</div>
+<div class="fragment">
 <ol type="1">
-<li class="fragment"><p>Mohammad, S. M., &amp; Turney, P. D. (2013). Crowdsourcing a word-emotion association lexicon. Computational Intelligence, 29(3), 436–465.</p></li>
-<li class="fragment"><p>Mohammad, S. M. (2018a). Obtaining reliable human ratings of valence, arousal, and dominance for 20,000 english words. Proceedings of the Annual Conference of the Association for Computational Linguistics (ACL).</p></li>
-<li class="fragment"><p>Brysbaert, M., Warriner, A. B., &amp; Kuperman, V. (2014). Concreteness ratings for 40 thousand generally known english word lemmas. Behavior Research Methods, 46, 904–911.</p></li>
-<li class="fragment"><p>Kuperman, V., Stadthagen-Gonzalez, H., &amp; Brysbaert, M. (2012). Age-of-acquisition ratings for 30,000 english words. Behavior Research Methods, 44, 978–990.</p></li>
-<li class="fragment"><p>Boyd, R., Ashokkumar, A., Seraj, S., &amp; Pennebaker, J. (2022). The development and psychometric properties of LIWC-22. https://doi.org/10.13140/RG.2.2.23890.43205</p></li>
-<li class="fragment"><p>Buechel, S., Rücker, S., &amp; Hahn, U. (2020, July). Learning and evaluating emotion lexicons for 91 languages. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics (pp.&nbsp;1202-1217).</p></li>
-<li class="fragment"><p>Lasser, J., Aroyehun, S. T., Carrella, F., Simchon, A., Garcia, D., &amp; Lewandowsky, S. (2023). From alternative conceptions of honesty to alternative facts in communications by US politicians. Nature human behaviour, 7(12), 2140-2151.</p></li>
-<li class="fragment"><p>Strapparava, C., &amp; Mihalcea, R. (2007). SemEval-2007 task 14: Affective text. In E. Agirre, L. Màrquez, &amp; R. Wicentowski (Eds.), Proceedings of the fourth international workshop on semantic evaluations (SemEval-2007) (pp.&nbsp;70–74). Association for Computational Linguistics. https://aclanthology.org/S07-1013</p></li>
-<li class="fragment"><p>Araque, O., Gatti, L., Staiano, J., &amp; Guerini, M. (2018). DepecheMood++: A bilingual emotion lexicon built through simple yet powerful techniques. CoRR, abs/1810.03660. http://arxiv.org/abs/1810.03660</p></li>
-<li class="fragment"><p>Strapparava, C., &amp; Valitutti, A. (2004). Wordnet affect: An affective extension of wordnet. Lrec, 4, 40.</p></li>
+<li class="fragment"><p>Input text → converted to static word embeddings (like Word2Vec/GloVe)</p></li>
+<li class="fragment"><p>Embeddings → transformer layers identify connections between words</p></li>
+<li class="fragment"><p>Connections → embeddings are shifted to reflect context (“short circuit” → electrical meaning)</p></li>
+<li class="fragment"><p>Repeated across many layers → progressively richer representations</p></li>
+<li class="fragment"><p>Final embeddings → used for the target task (next word prediction, classification, etc.)</p></li>
 </ol>
+</div>
+</section>
+<section id="types-of-contextualized-embeddings" class="slide level2">
+<h2>Types of contextualized embeddings</h2>
+<div class="fragment">
+<p>BERT</p>
+</div>
+<ul>
+<li class="fragment"><p>generalize to many tasks</p></li>
+<li class="fragment"><p>reliable</p></li>
+<li class="fragment"><p>[CLS] as summary of text</p></li>
+</ul>
+<div class="fragment">
+<p>RoBERTa</p>
+</div>
+<ul>
+<li class="fragment"><p>focus on author-level characteristics (e.g., age, gender, personality)</p></li>
+<li class="fragment"><p>larger and longer training</p></li>
+</ul>
+<div class="fragment">
+<p>SBERT</p>
+</div>
+<ul>
+<li class="fragment"><p>sentence-level embeddings</p></li>
+<li class="fragment"><p>guarantees geometrical properties</p></li>
+</ul>
+</section>
+<section id="visualizing-the-vector-space" class="slide level2">
+<h2>Visualizing the vector space</h2>
+<div class="fragment">
+<p>Word vectors live in 300 dimensions — impossible to visualize directly.</p>
+<p>Dimensionality reduction projects them into 2D while preserving structure.</p>
+</div>
+<div class="fragment">
+<p>Three common methods:</p>
+</div>
+<dl>
+<dt class="fragment">PCA (Principal Component Analysis)</dt>
+<dd class="fragment">
+Finds the directions of maximum variance globally
+</dd>
+<dd class="fragment">
+Preserves global structure — clusters that are far apart stay far apart
+</dd>
+<dd class="fragment">
+Fast, deterministic, but misses local non-linear structure
+</dd>
+<dt class="fragment">t-SNE</dt>
+<dd class="fragment">
+Handles non-linear structure better
+</dd>
+<dd class="fragment">
+Excellent at revealing tight local clusters
+</dd>
+<dd class="fragment">
+Slow, non-deterministic, distorts global distances — two clusters being far apart means nothing
+</dd>
+<dt class="fragment">UMAP</dt>
+<dd class="fragment">
+Similar intuition to t-SNE but preserves both local and some global structure
+</dd>
+<dd class="fragment">
+Faster than t-SNE, more stable across runs
+</dd>
+<dd class="fragment">
+Best general-purpose choice for word embeddings
+</dd>
+</dl>
+<div class="fragment">
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>These methods show structure that was already in the 300D space — they don’t create similarity, they reveal it.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="à-la-carte-alc-embeddings" class="slide level2 scrollable">
+<h2>À la carte (ALC) embeddings</h2>
+<div class="fragment">
+<p>The problem with decontextualized embeddings: “lula” has one fixed vector.</p>
+</div>
+<div class="fragment">
+<p>ALC embeddings builds a context-specific vector for a target word:</p>
+<ol type="1">
+<li class="fragment">Take every occurrence of the target word in your corpus</li>
+<li class="fragment">Collect the words in a window around each occurrence (e.g.&nbsp;±6 words)</li>
+<li class="fragment">Average their pretrained GloVe vectors</li>
+<li class="fragment">Multiply by a learned transformation matrix to align the result with the GloVe space</li>
+</ol>
+</div>
+<div class="fragment">
+<p>The result: one embedding per instance of the word, not per word type.</p>
+<p>You can then average across groups to get “what does this word mean for group A vs group B?”</p>
+</div>
+</section>
+<section id="context-nearest-neighbors-by-group" class="slide level2">
+<h2>conText — nearest neighbors by group</h2>
+<div class="fragment">
+<p><a href="https://github.com/prodriguezsosa/conText/tree/master"><code>conText</code></a> operationalizes this for social science:</p>
+<ul>
+<li class="fragment">Pick a target word (e.g.&nbsp;“lula”, “vacina”, “fraude”)</li>
+<li class="fragment">Define a grouping variable (e.g.&nbsp;misinformation label, party, time period)</li>
+<li class="fragment">Get the top N nearest neighbors of that word’s ALC embedding separately for each group</li>
+<li class="fragment">Compare: what words does each group associate with the target?</li>
+</ul>
+</div>
+<div class="fragment">
+<p>Does this word mean different things to different groups?</p>
 
+</div>
 </section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">

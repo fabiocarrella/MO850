@@ -8,6 +8,10 @@ format:
 editor: visual
 ---
 
+## Activity
+
+![](qr-code.png)
+
 ## What is a dictionary?
 
 -   A dictionary is a list of words (or other tokens) associated with a given construct.
@@ -32,19 +36,19 @@ editor: visual
 -   English resources:
 
     -   https://saifmohammad.com/WebPages/lexicons.html
-  
+
     -   https://www.sciencedirect.com/topics/psychology/emotion-lexica
-    
+
     -   https://github.com/niderhoff/nlp-datasets
-  
+
     -   https://github.com/nlpfromscratch/nlp-llms-resources
 
 -   Non-English resources:
 
     -   https://github.com/keon/awesome-nlp
-    
+
     -   https://github.com/ajdavidl/Portuguese-NLP
-    
+
     -   https://portulanclarin.net/
 
 ## DBA with Quanteda
@@ -101,22 +105,22 @@ Steps:
 
 ## References
 
-1) Mohammad, S. M., & Turney, P. D. (2013). Crowdsourcing a word-emotion association lexicon. Computational Intelligence, 29(3), 436–465.
+1)  Mohammad, S. M., & Turney, P. D. (2013). Crowdsourcing a word-emotion association lexicon. Computational Intelligence, 29(3), 436–465.
 
-2) Mohammad, S. M. (2018a). Obtaining reliable human ratings of valence, arousal, and dominance for 20,000 english words. Proceedings of the Annual Conference of the Association for Computational Linguistics (ACL).
+2)  Mohammad, S. M. (2018a). Obtaining reliable human ratings of valence, arousal, and dominance for 20,000 english words. Proceedings of the Annual Conference of the Association for Computational Linguistics (ACL).
 
-3) Brysbaert, M., Warriner, A. B., & Kuperman, V. (2014). Concreteness ratings for 40 thousand generally known english word lemmas. Behavior Research Methods, 46, 904–911.
+3)  Brysbaert, M., Warriner, A. B., & Kuperman, V. (2014). Concreteness ratings for 40 thousand generally known english word lemmas. Behavior Research Methods, 46, 904–911.
 
-4) Kuperman, V., Stadthagen-Gonzalez, H., & Brysbaert, M. (2012). Age-of-acquisition ratings for 30,000 english words. Behavior Research Methods, 44, 978–990.
+4)  Kuperman, V., Stadthagen-Gonzalez, H., & Brysbaert, M. (2012). Age-of-acquisition ratings for 30,000 english words. Behavior Research Methods, 44, 978–990.
 
-5) Boyd, R., Ashokkumar, A., Seraj, S., & Pennebaker, J. (2022). The development and psychometric properties of LIWC-22. https://doi.org/10.13140/RG.2.2.23890.43205
+5)  Boyd, R., Ashokkumar, A., Seraj, S., & Pennebaker, J. (2022). The development and psychometric properties of LIWC-22. https://doi.org/10.13140/RG.2.2.23890.43205
 
-6) Buechel, S., Rücker, S., & Hahn, U. (2020, July). Learning and evaluating emotion lexicons for 91 languages. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics (pp. 1202-1217).
+6)  Buechel, S., Rücker, S., & Hahn, U. (2020, July). Learning and evaluating emotion lexicons for 91 languages. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics (pp. 1202-1217).
 
-7) Lasser, J., Aroyehun, S. T., Carrella, F., Simchon, A., Garcia, D., & Lewandowsky, S. (2023). From alternative conceptions of honesty to alternative facts in communications by US politicians. Nature human behaviour, 7(12), 2140-2151.
+7)  Lasser, J., Aroyehun, S. T., Carrella, F., Simchon, A., Garcia, D., & Lewandowsky, S. (2023). From alternative conceptions of honesty to alternative facts in communications by US politicians. Nature human behaviour, 7(12), 2140-2151.
 
-8) Strapparava, C., & Mihalcea, R. (2007). SemEval-2007 task 14: Affective text. In E. Agirre, L. Màrquez, & R. Wicentowski (Eds.), Proceedings of the fourth international workshop on semantic evaluations (SemEval-2007) (pp. 70–74). Association for Computational Linguistics. https://aclanthology.org/S07-1013
+8)  Strapparava, C., & Mihalcea, R. (2007). SemEval-2007 task 14: Affective text. In E. Agirre, L. Màrquez, & R. Wicentowski (Eds.), Proceedings of the fourth international workshop on semantic evaluations (SemEval-2007) (pp. 70–74). Association for Computational Linguistics. https://aclanthology.org/S07-1013
 
-9) Araque, O., Gatti, L., Staiano, J., & Guerini, M. (2018). DepecheMood++: A bilingual emotion lexicon built through simple yet powerful techniques. CoRR, abs/1810.03660. http://arxiv.org/abs/1810.03660
+9)  Araque, O., Gatti, L., Staiano, J., & Guerini, M. (2018). DepecheMood++: A bilingual emotion lexicon built through simple yet powerful techniques. CoRR, abs/1810.03660. http://arxiv.org/abs/1810.03660
 
 10) Strapparava, C., & Valitutti, A. (2004). Wordnet affect: An affective extension of wordnet. Lrec, 4, 40.

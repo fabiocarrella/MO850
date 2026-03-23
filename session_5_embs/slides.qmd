@@ -1,0 +1,354 @@
+---
+title: "MO850 – Tópicos Avançados em Ciência da Computação I"
+format:
+  revealjs:
+    scrollable: true
+    incremental: true
+    width: 1500
+editor: visual
+---
+## Activity
+
+![](qr-code.png)
+
+
+## What are (word) embeddings?
+::: {.fragment}
+Word embeddings are dense vector representations of words that capture semantic meaning.
+:::
+
+::: {.fragment}
+Words with similar meanings are placed close to each other in a multi-dimensional space.
+:::
+
+## BOW vs Embeddings
+
+Bag-of-Words:
+
+```text
+cat = [1, 0, 0, 0, 0, ..., 0]  (10,000 dimensions)
+dog = [0, 1, 0, 0, 0, ..., 0]
+car = [0, 0, 1, 0, 0, ..., 0]
+```
+
+- Each word is an isolated symbol, no "meaning" encoded
+
+- "cat" and "dog" are just as different as "cat" and "car"
+
+- Sparse vectors: thousands of dimensions, mostly zeros
+
+- Dimensions = vocabulary size
+
+## BOW vs Embeddings
+
+::: {.fragment}
+How do we associate a word with a meaning (e.g., a cognitive process, an emotion)?
+:::
+
+::: {.fragment}
+Core idea: Words appearing in similar contexts have similar meanings.
+
+> "You shall know a word by the company it keeps"
+> — J.R. Firth (1957)
+:::
+
+::: {.fragment}
+::: {.callout-note}
+Similarity comes from shared context, not co-occurrence
+:::
+:::
+
+:::{.fragment}
+Distributional Semantic Models (DSMs) = algorithms that learn the meanings of tokens (or at least the relations between their meanings) from patterns of contextual co-occurrence
+:::
+
+## Why embeddings matter
+
+::: {.fragment}
+```text
+cat  = [0.2, -0.4, 0.7, ..., 0.1]  (300 dimensions)  
+dog  = [0.3, -0.5, 0.8, ..., 0.2]  (similar to cat!)  
+car  = [-0.1, 0.6, -0.3, ..., 0.4] (different from cat/dog) 
+```
+:::
+
+::: {.fragment}
+Advantages:
+
+- Semantic similarity captured
+
+- Dense, efficient representation
+
+- Fixed dimensions (typically 256-4096)
+
+- Mathematical operations meaningful
+:::
+
+## Applications
+
+::: {.fragment}
+Real-World Applications
+
+- Search engines & information retrieval — go beyond keyword matching
+
+- Machine translation — map meaning across languages
+
+- Sentiment analysis & text classification — richer features than raw words
+
+- Question answering & recommendation systems — match by meaning, not just form
+
+- Named entity recognition — recognize entities in context
+:::
+
+::: {.fragment}
+Linguistic Research
+
+- Semantic change — track how word meanings shift across decades
+
+- Bias detection — uncover implicit associations (e.g. gender, race)
+
+- Metaphor analysis — identify non-literal and cross-domain mappings
+
+- Construct representation — extract constructs from word vectors
+:::
+
+## Navigating the vector space
+
+::: {.fragment}
+Embeddings represent words as vectors in high-dimensional space where:
+:::
+
+- Each dimension captures some aspect of meaning
+- Similar words cluster together
+- Relationships are preserved geometrically
+
+::: {.fragment}
+We can quantify similarity between vectors:
+
+Euclidean distance
+: Straight-line distance
+: Low = similar
+
+Cosine similarity
+: Angle between vectors
+: 1 = identical, -1 = opposite
+
+Dot product
+: Angle + magnitude
+: Higher = more similar and prominent
+:::
+
+## Types of word embeddings
+
+::: {.fragment}
+Count-based methods (e.g., LSA, HAL)
+:::
+
+::: {.fragment}
+DFM -> Find patterns of co-occurrence -> Reduce dimensionality
+:::
+
+::: {.fragment}
+Advantages:
+:::
+
+- Straightforward to understand
+
+- Interpretable dimensions
+
+- Good for small datasets
+
+::: {.fragment}
+Disadvantages:
+:::
+
+- Uses documents to define word contexts
+
+- Assumes linearity and normality
+
+- Less effective than modern methods
+
+- Same problems with raw word counts
+
+## Types of word embeddings
+
+::: {.fragment}
+Prediction-Based Methods (e.g., GloVe^\[1\]^, word2vec^\[2\]^, fastText^\[3\]^)
+
+The model weights are the embeddings
+:::
+
+::: {.fragment}
+Two main architectures:
+:::
+
+CBOW
+
+: Input: Context words
+
+: Output: Target word
+
+: Fast training
+
+: Better for frequent words
+
+Skip-gram
+
+: Input: Target word
+
+: Output: Context words
+
+: Slower training
+
+: Better for rare words and small datasets
+
+## Types of decontextualized embeddings
+
+::: {.fragment}
+Word2vec:
+:::
+- efficient 
+
+- two vectors per word 
+
+- struggles with polisemy
+
+- works better with English
+
+::: {.fragment}
+GloVe:
+:::
+
+- better trained models than Word2Vec
+
+- same issues than Word2vec
+
+::: {.fragment}
+FastText:
+:::
+
+- works with shingles rather than words
+
+- can infer embeddings of "absent" words
+
+- more complex (larger models)
+
+
+## Types of word embeddings
+
+::: {.fragment}
+Contextualized embeddings (e.g., BERT^\[1\]^, RoBERTa^\[2\]^, SBERT^\[3\]^)
+
+Different embeddings for different contexts (with transformers)
+:::
+
+::: {.fragment}
+1. Input text → converted to static word embeddings (like Word2Vec/GloVe)
+
+2. Embeddings → transformer layers identify connections between words
+
+3. Connections → embeddings are shifted to reflect context ("short circuit" → electrical meaning)
+
+4. Repeated across many layers → progressively richer representations
+
+5. Final embeddings → used for the target task (next word prediction, classification, etc.)
+:::
+
+## Types of contextualized embeddings
+
+::: {.fragment}
+BERT
+:::
+
+- generalize to many tasks
+
+- reliable
+
+- [CLS] as summary of text
+
+::: {.fragment}
+RoBERTa
+:::
+
+- focus on author-level characteristics (e.g., age, gender, personality)
+
+- larger and longer training
+
+::: {.fragment}
+SBERT
+:::
+
+- sentence-level embeddings
+
+- guarantees geometrical properties
+
+
+## Visualizing the vector space
+
+::: {.fragment}
+Word vectors live in 300 dimensions — impossible to visualize directly.
+
+Dimensionality reduction projects them into 2D while preserving structure.
+:::
+
+::: {.fragment}
+Three common methods:
+:::
+
+PCA (Principal Component Analysis)
+: Finds the directions of maximum variance globally
+: Preserves global structure — clusters that are far apart stay far apart
+: Fast, deterministic, but misses local non-linear structure
+
+t-SNE
+: Handles non-linear structure better
+: Excellent at revealing tight local clusters
+: Slow, non-deterministic, distorts global distances — two clusters being far apart means nothing
+
+UMAP
+: Similar intuition to t-SNE but preserves both local and some global structure
+: Faster than t-SNE, more stable across runs
+: Best general-purpose choice for word embeddings
+
+::: {.fragment}
+::: {.callout-warning}
+These methods show structure that was already in the 300D space — they don't create similarity, they reveal it.
+:::
+:::
+
+
+## À la carte (ALC) embeddings
+
+::: {.fragment}
+The problem with decontextualized embeddings: "lula" has one fixed vector.
+:::
+
+::: {.fragment}
+ALC embeddings builds a context-specific vector for a target word:
+
+1. Take every occurrence of the target word in your corpus
+2. Collect the words in a window around each occurrence (e.g. ±6 words)
+3. Average their pretrained GloVe vectors
+4. Multiply by a learned transformation matrix to align the result with the GloVe space
+:::
+
+::: {.fragment}
+The result: one embedding per instance of the word, not per word type.
+
+You can then average across groups to get "what does this word mean for group A vs group B?"
+:::
+
+
+## conText — nearest neighbors by group
+
+::: {.fragment}
+[`conText`](https://github.com/prodriguezsosa/conText/tree/master) operationalizes this for social science:
+
+- Pick a target word (e.g. "lula", "vacina", "fraude")
+- Define a grouping variable (e.g. misinformation label, party, time period)
+- Get the top N nearest neighbors of that word's ALC embedding separately for each group
+- Compare: what words does each group associate with the target?
+:::
+
+::: {.fragment}
+Does this word mean different things to different groups?
