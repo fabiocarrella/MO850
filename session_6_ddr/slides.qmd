@@ -1,0 +1,86 @@
+---
+title: "MO850 – Tópicos Avançados em Ciência da Computação I"
+format:
+  revealjs:
+    scrollable: true
+    incremental: true
+    width: 1500
+editor: visual
+---
+
+## Measuring constructs with dictionaries
+
+::: fragment
+Dictionaries have been constructed and validated for years.
+:::
+
+::: fragment
+Word-counting presents several issues.
+:::
+
+::: fragment
+How could we solve (some of) these issues with embeddings?
+:::
+
+## Distributed Dictionary Representation
+
+::: fragment
+Distributed Dictionary Representation (or DDR)^\[1\]^ has the best of both worlds.
+:::
+
+::: fragment
+Straightforward pipeline:
+
+- extract embeddings per word in dictionary
+
+- average the embeddings to have a DDR (aka _centroid_ or _reference_ vector)
+
+- embed texts
+
+- measure similarity (i.e., the **extent**) between texts and _centroid_
+:::
+
+
+
+## Distributed Dictionary Representation
+::: fragment
+DDR is particularly useful for abstract constructs
+:::
+
+::: fragment
+Authors suggest small dictionaries (e.g., 30 seed words)
+:::
+
+:::: fragment
+::: callout-warning
+Word embeddings are particularly sensitive to infrequent terms.
+:::
+::::
+
+::: fragment
+What do you think are pros and cons of DDR?
+:::
+
+::: fragment
+**Pros**
+
+- More robust than word counting
+- Easier to model statistically
+- Word-by-word analysis
+- A short dictionary is enough
+:::
+
+::: fragment
+**Cons**
+
+- Does not work for linguistic measures
+- Can implicitly encode associated constructs
+- May not work with contextualized embeddings
+:::
+
+
+## References
+
+1.  Garten, J., Hoover, J., Johnson, K. M., Boghrati, R., Iskiwitch, C., & Dehghani, M. (2018). Dictionaries and distributions: Combining expert knowledge and large scale textual data content analysis: Distributed dictionary representation. Behavior Research Methods, 50, 344–361.
+
+

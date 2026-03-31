@@ -332,7 +332,7 @@ summary(m4)
 ## create a dictionary
 seed_words <- c("")
 
-our_dict <- dictionary(list(var = seed_words))
+our_dict <- dictionary(list(var = our_dict$answer))
 
 dfm %>%
   dfm_lookup(our_dict)
@@ -359,6 +359,13 @@ our_dict_df %>%
   theme(text = element_text(size = 18), legend.position = "none") +
   labs(x = "", y = "% of articles mentioning keywords")
 
+m5 <- glmmTMB(var ~ misinformation + wc,
+  offset = log(wc),
+  family = nbinom2,
+  data = our_dict_df
+)
+summary(m5)
+  
 
 # expand keywords
 # download from portulanclarin
