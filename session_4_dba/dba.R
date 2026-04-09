@@ -331,7 +331,9 @@ summary(m4)
 
 ## create a dictionary
 seed_words <- c("")
-
+our_dict <- read_delim("session_4_dba/data/dict.csv", 
+                       delim = ";", escape_double = FALSE, col_types = cols(...3 = col_skip()), 
+                       trim_ws = TRUE)
 our_dict <- dictionary(list(var = our_dict$answer))
 
 dfm %>%

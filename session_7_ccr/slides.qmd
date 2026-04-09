@@ -1,0 +1,174 @@
+---
+title: "MO850 – Tópicos Avançados em Ciência da Computação I"
+format:
+  revealjs:
+    scrollable: true
+    incremental: true
+    width: 1500
+editor: visual
+---
+
+## Activity
+
+In your own words, what do you think about artificial intelligence — what it is, what it does, and what it means for your life and the world? 
+
+![](qr-code.png)
+
+## Measuring constructs with contextualized embeddings
+
+::: fragment
+Contextualized embeddings are dynamically generated based on the entire sentence or context in which a word appears.
+:::
+
+::: fragment
+The final representation of a word depends on the surrounding words (thanks to *attention*)
+:::
+
+::: fragment
+Contextualized embeddings are not designed to embed single words, which is needed for dictionary approaches (e.g., DDR).
+:::
+
+## Contextualized Construct Representation
+
+::: fragment
+Dictionaries are not the only curated resources to measure constructs.
+:::
+
+::: fragment
+Contextualized Construct Representation (or CCR)^\[1\]^ leverages psychological questionnaires.
+:::
+
+::: fragment
+Straightforward pipeline:
+
+-   extract embeddings per item in questionnaire
+
+-   average the embeddings to have a CCR (aka *centroid* or *reference* vector)
+
+-   embed texts
+
+-   measure similarity (i.e., the **extent**) between texts and *centroid*
+:::
+
+::: fragment
+Since we are not using isolated words, we can take advantage of contextualized embeddings.
+:::
+
+## Psychometric Questionnaires
+
+Questionnaires go through a thorough generation pipeline^\[2\]^:
+
+::: fragment
+1.  Identification of domain and item generation
+    -   Describe the construct of interest (and its dimensions)
+    -   Generate (many) items with deductive and/or inductive methods
+    -   Assessing content validity with expert and end users
+:::
+
+::: fragment
+2.  Scale development
+    -   (Pre) testing the items on the population
+    -   Reducing the items based on difficulty, discrimination, correlations
+    -   Extracting latent constructs with Factor Analysis
+:::
+
+::: fragment
+3.  Scale evaluation
+    -   Check if latent constructs are as hypothesized
+    -   Check reliability (internal consistency, test-retest)
+    -   Check validity (convergence, discrimination, correlation with existing scales)
+:::
+
+## From construct to questionnaire
+
+The construct is not something real in itself, it is an attempt to indirectly measure real phenomena^\[3\]^.
+
+::: fragment
+This causes the "jingle-jangle" jungle ^\[4, 5\]^:
+
+-   same construct label for different measures
+
+-   different construct labels for same measure
+:::
+
+## Sources of questionnaires
+
+Different sources offer questionnaires:
+
+-   [APA PsycTests (paid)](https://www.apa.org/pubs/databases/psyctests)
+
+-   [International Personality Item Pool](https://ipip.ori.org/newIndexofScaleLabels.htm)
+
+-   [Psytoolkit](https://www.psytoolkit.org/survey-library/)
+
+-   [Open-source Psychometrics Project](https://openpsychometrics.org/)
+
+-   Google Scholar
+
+-   [Ai2 Asta](https://asta.allen.ai/) (or LLMs in general)
+
+## Anchored vectors
+
+Word embeddings have analogical properties.
+
+Relationships between words are preserved as vector arithmetic.
+
+::: fragment
+We can leverage this property to extract vectors between two embeddings.
+
+These are called **anchored vectors**.
+:::
+
+::: fragment
+We can project embeddings onto anchored vectors to see how they position on a scale^\[6\]^.
+:::
+
+## Properties of anchored vectors
+
+::: fragment
+Projecting on anchored vectors mitigates correlation problems between related reference vectors (e.g., happiness vs. sadness)
+:::
+
+::: fragment
+Anchored vectors also help reducing the effects of "questionnaire" style in CCR.
+:::
+
+:::: fragment
+::: callout-warning
+Additive analogies assume linear embeddings with consistent magnitudes.
+
+Contextualized embeddings are nonlinear, so analogies often work poorly.
+:::
+::::
+
+## Correlational anchored vectors
+
+We can use machine learning to create anchored vectors from data.
+
+::: fragment
+Using Partial Least Squares (PLS), we can extract a CAV that reflects the direction of maximum covariance with a dependent variable.
+:::
+
+::: fragment
+PLS is similar to PCA: both reduce dimensions, but PLS finds components that best predict the target variable, while PCA maximizes variance.
+:::
+
+::: fragment
+PLS does not need categorized data, it works with continuous variables too.
+:::
+
+## References
+
+::: nonincremental
+1.  Atari, M., Omrani, A., & Dehghani, M. (2023). Contextualized construct representation: Leveraging psychometric scales to advance theory-driven text analysis. PsyArXiv. https://doi.org/10.31234/osf.io/m93pd
+
+2.  Boateng, G. O., Neilands, T. B., Frongillo, E. A., Melgar-Quiñonez, H. R., & Young, S. L. (2018). Best Practices for Developing and Validating Scales for Health, Social, and Behavioral Research: A Primer. Frontiers in public health, 6, 149. https://doi.org/10.3389/fpubh.2018.00149
+
+3.  Stefana, A., Damiani, S., Granziol, U., Provenzani, U., Solmi, M., Youngstrom, E.A., & Fusar-Poli, P. (2025). Psychological, psychiatric, and behavioral sciences measurement scales: best practice guidelines for their development and validation. Frontiers in Psychology, 15.
+
+4.  Wulff, D.U., Mata, R. Semantic embeddings reveal and address taxonomic incommensurability in psychological measurement. Nat Hum Behav 9, 944–954 (2025). https://doi.org/10.1038/s41562-024-02089-y
+
+5.  Wulff, D. U., & Mata, R. (2025). Escaping the jingle-jangle jungle: Increasing conceptual clarity in psychology using large language models. Current Directions in Psychological Science, 09637214251382083.
+
+6.  Grand, G., Blank, I. A., Pereira, F., & Fedorenko, E. (2022). Semantic projection recovers rich human knowledge of multiple object features from word embeddings. Nature Human Behaviour, 6(7), 975–987. https://doi.org/10.1038/s41562-022-01316-8
+:::
