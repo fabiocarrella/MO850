@@ -1,0 +1,265 @@
+---
+title: "MO850 – Tópicos Avançados em Ciência da Computação I"
+format:
+  revealjs:
+    scrollable: true
+    incremental: true
+    width: 1500
+editor: visual
+---
+
+## Final project details
+
+Make sure you can access the Aletheia dataset
+
+Explore the data **using methods we have seen so far**
+
+::: fragment
+The dataset contains a variety of variables you can use:
+
+- date
+
+- forwarded_from
+
+- is_vaccine_related
+
+- language
+
+- media_description/title/url/type
+
+- n_forwards/reactions/views
+
+- reply_to
+
+- texts
+:::
+
+## Final project details
+
+::: fragment
+Students are required to: 
+
+- create a written report of their project
+
+- present their results to the class (15 + 5 minutes)
+:::
+
+::: fragment
+Evaluation will consider:
+
+- Depth: how layered and rigorous the analysis is
+
+- Creativity: how original or interesting the questions/solutions are
+
+- Critical thinking: critical stance on the method(s) chosen
+
+- Quality of writing/exposition: clarity, structure, delivery
+:::
+
+## What we have covered so far
+
+::: fragment
+Why study text computationally?
+
+- Language as a vehicle for persuasion, misinformation, nudging
+
+- Psychological constructs (emotion, attitude, personality) leave traces in text
+:::
+
+::: fragment
+Text as data
+
+- Text becomes data when features are extracted and structured
+
+- Sources: social media, news, speeches, surveys — each with tradeoffs
+
+- Key advantages: correlational, longitudinal, large scale
+
+- Key risks: non-representative, noisy, ethically sensitive
+:::
+
+:::fragment
+Word counts & topic modeling
+
+- Raw frequency → relative frequency → TF-IDF
+
+- Stopwords and occurrence thresholds: useful but lossy
+
+- Keyness: statistically sounder than frequency ratios for group comparisons
+
+- LDA: documents as mixtures of topics, topics as distributions over words
+:::
+
+## What we have covered so far
+
+::: fragment
+Dictionary-based analysis
+
+- Dictionaries: word lists associated with a construct
+
+- Types: crowdsourced, expert-generated, corpus-based, thesaurus-based
+
+- Tradeoff: intuitive and theory-driven, but rigid and context-blind
+:::
+
+::: fragment
+From embeddings to construct measurement
+
+- Words in similar contexts share similar meanings (distributional hypothesis)
+
+- Embeddings: dense vectors where geometry encodes meaning
+
+- Non-contextual (Word2Vec, GloVe, FastText) vs. contextual (BERT, SBERT)
+
+- DDR: average dictionary word embeddings → cosine similarity with texts
+
+- CCR: same pipeline but with questionnaire items + contextual embeddings
+
+- Anchored vectors: project embeddings onto a pole-to-pole axis → reduces construct correlation
+
+- CAV: data-driven anchored vectors via PLS, works with continuous outcomes
+:::
+
+## Limits of DDR/CCR
+
+- DDR: quality depends on dictionary; implicitly encodes associated constructs
+
+- CCR: depends on questionnaire availability and items quality
+
+- Both: struggle when constructs are multi-dimensional or definitionally complex
+
+## LLMs as a third approach
+
+::: fragment
+LLMs bring a few advantages:
+
+- No need for a reference dictionary or questionnaire
+
+- Can handle complex, multi-part definitions
+
+- Produces output **and** reasoning, which aids interpretability
+
+- Cheaper than human ratings
+
+- Better than human ratings?^[1]^ ^[2]^ ^[3]^
+:::
+
+## Limitations of LLMs
+::: fragment
+LLMs also bring a few disadvantages:
+
+- Scalability (costs, resource-intensive vs. smaller models)
+
+- Output quality
+
+- Transparency and ethics
+
+- Reproducibility
+
+- Prompt variations (wording and structure^4^)
+
+- Cross-language performances
+
+- Implicit biases
+:::
+## Practical approaches
+
+Different ways to measure attributes on qualitative data^5^:
+
+| Function | Purpose | Example |
+|----------|---------|---------|
+| `rate` | Score items on attributes (0–100)^6^ | "toxicity" in tweets |
+| `classify` | Assign items to categories | Vaccine-related tweets |
+| `rank` | Pairwise comparisons → ELO-like scores | Rank speeches by "populist rhetoric" |
+| `extract` | Extract structured facts | Company, CEO, year |
+| `discover` | Find features distinguishing groups | 5★ vs 1★ reviews |
+
+
+## Best practices for text annotation with LLMs^7^
+
+1. Choose your model carefully
+
+2. Follow a systematic coding procedure
+
+3. Develop a prompt codebook
+
+4. Validate your model
+
+5. Engineer your prompts
+
+6. Set and report your parameters
+
+7. Consider ethical and legal implications
+
+## Output validation: are our scores meaningful?
+
+The construct validity problem from psychometrics
+
+Operationalization gap: the distance between a theoretical construct and what a method actually captures
+
+::: fragment
+Example: measuring "honesty" in political speeches — what would ground truth even look like?
+:::
+
+## Validation strategies for LLMs
+
+::: fragment
+Focus on accuracy and directness^5^:
+
+Accuracy:
+
+1. Agreement with human labels
+
+2. External validity and prediction of ground truth
+
+3. Prompt brittleness and noise
+:::
+
+::: fragment
+Directness:
+
+1. Contamination risk
+
+2. Shortcut inference
+:::
+
+## Further validation strategies
+
+When lacking access to ground-truth:
+
+1. Face validity with obvious examples
+
+2. Convergent validity with existing lexicons (if possible)
+
+3. Discriminant validity
+
+4. "Known-groups" validation
+
+5. Multi-method triangulation 
+
+6. LLM-as-annotator reliability
+
+
+
+
+
+
+
+
+## References
+
+::: nonincremental
+1. Gilardi, F., Alizadeh, M., & Kubli, M. (2023). ChatGPT outperforms crowd workers for text-annotation tasks. Proceedings of the National Academy of Sciences, 120(30), e2305016120.
+
+2.  Törnberg, P. (2025). Large language models outperform expert coders and supervised classifiers at annotating political social media messages. Social Science Computer Review, 43(6), 1181-1195.
+
+3.  Bojić, L., Zagovora, O., Zelenkauskaitė, A., Vuković, V., Čabarkapa, M., Veseljević Jerković, S., & Jovančević, A. (2025). Comparing large Language models and human annotators in latent content analysis of sentiment, political leaning, emotional intensity and sarcasm. Scientific Reports, 15.
+
+4. Herderich, A., Lasser, J., Galesic, M., Aroyehun, S. T., Garcia, D., & Garland, J. (2024, August 1). Measuring complex psychological and sociological constructs in large-scale text. https://doi.org/10.31234/osf.io/tzc9p
+
+5.  Asirvatham, H., Mokski, E., & Shleifer, A. (2026). GPT as a Measurement Tool (No. w34834). National Bureau of Economic Research.
+
+6.  Li, W., Zhao, M., Dong, W., Cai, J., Wei, Y., Pocress, M., Li, Y., Yuan, W., Wang, X., Hou, R., Lou, K., Zeng, W., Yang, Y., Du, Y., & Wang, M. (2026). Grading Scale Impact on LLM-as-a-Judge: Human-LLM Alignment Is Highest on 0-5 Grading Scale. ArXiv, abs/2601.03444.
+
+7. Törnberg, P. (2024). Best Practices for Text Annotation with Large Language Models. ArXiv, abs/2402.05129.
+:::
