@@ -3,3 +3,13 @@ IC - Course - Carrella.pdf
 *_notes*
 .Rhistory
 .Rproj.user/
+session_10_stats/data/brpolicorpus_honesty_ddr.parquet
+session_4_dba/data/mwnpt-rdf.xml
+session_5_embs/cc.pt.300.bin
+session_6_ddr/.vscode/settings.json
+session_6_ddr/data/brpoli_doc_vecs.npy
+session_6_ddr/data/BrPoliCorpus_CPI.csv
+session_6_ddr/data/BrPoliCorpus_Floor.parquet
+session_6_ddr/data/olist_liwc_scores.parquet
+session_6_ddr/data/utlc_movies_liwc_scores.parquet
+session_7_ccr/data/timebin_sampled_telegram - timebin_sampled_telegram.csv
