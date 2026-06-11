@@ -1,0 +1,398 @@
+---
+title: "MO850 – Tópicos Avançados em Ciência da Computação I"
+format:
+  revealjs:
+    scrollable: true
+    incremental: true
+    width: 1500
+editor: visual
+execute:
+  echo: true
+  eval: false
+---
+
+## What We've Been Doing
+
+::: {.incremental}
+- We built a toolkit to measure psychological constructs in text
+  - lexicons, embeddings, DDR/CCR, topic models
+  
+- One shared assumption underlies all of it:
+  - *text is a trace of a human mind*
+  
+- Today we stress-test that assumption
+:::
+
+## The assumption
+
+> "If we can extract personality, morality, and emotion from text —  
+> what happens when no one wrote it?"
+
+- LLM-generated text is now everywhere: ads, news, political messaging
+
+- Do our tools still mean what we think they mean?
+
+---
+
+## Part 1 — From measurement to microtargeting {.center background-color="#f5f5f5"}
+
+*What we've already been doing, and why it matters*
+
+---
+
+## Simchon et al. (2023): text reveals personality
+
+- Reddit data (N = 1,105 writers + 10,050 readers)
+
+- **Model 1**: BERT predicts Big Five from *produced* text (r ≈ 0.33)
+
+- **Model 2**: BERT predicts personality from *consumed* text (r ≈ 0.13)
+
+- Key insight: linguistic style of what you write/read leaks your personality
+
+::: fragment
+→ This is our toolkit in action: embeddings measuring psychological constructs at scale
+::: 
+
+---
+
+## Simchon et al. (2024): the next step
+::: fragment
+*What if you use a large language model to write ads?*
+:::
+- Used GPT to generate political ads tailored to high/low openness
+
+- Personality-matched ads were **significantly more persuasive**
+
+- Combined with inferring personality from consumed text:
+  - infer who you are → generate a message just for you → at scale
+
+:::fragment
+> "A scalable manipulation machine that targets individuals based on  
+> their unique vulnerabilities" — Simchon et al. (2024)
+:::
+---
+
+## Carrella et al. (2025): warning does not help
+
+::: fragment
+*If microtargeted ads are more persuasive, what if we just... tell people?*
+:::
+
+- Three pre-registered studies (N = 666, 432, 669)
+
+- Compared targeted vs. non-targeted political ads, with and without warning popups
+
+- Result: targeted ads **consistently more persuasive** than non-targeted ones
+
+- Warning popups had **no meaningful impact** on persuasiveness
+
+
+## This is the break point
+::: fragment
+Our measurements were designed to *understand* human communication
+:::
+
+::: fragment
+LLMs flip the arrow:
+
+| Before | After |
+|---|---|
+| measure personality in text | generate text *for* a personality |
+| extract moral framing | inject moral framing on demand |
+| detect emotion | produce targeted emotional content |
+:::
+
+::: fragment
+**The question is no longer just measurement — it's about what the text is doing**
+:::
+
+---
+
+## Part 2 — Are LLMs actually persuasive? {.center background-color="#f5f5f5"}
+
+*The empirical picture*
+
+---
+
+## What do we mean by persuasion?
+
+- Change in **attitude, belief, or behavioral intention** following exposure to a message
+
+- Classic framework: Elaboration Likelihood Model (Petty & Cacioppo, 1986)
+  - **Central route**: deliberate processing of argument quality
+  - **Peripheral route**: heuristics — source credibility, fluency, affect
+
+- Key question: *which route do LLM messages exploit?*
+
+## Goldstein et al. (2024) — propaganda at scale
+
+- Compared GPT-3-generated news articles to real Iranian/Russian propaganda (N = 8,221)
+
+- GPT-3 produced content **as persuasive as real foreign propaganda**
+
+- Human curation of prompts made it *even more* persuasive
+
+- Quality metrics (fluency, trustworthiness): GPT-3 matched or exceeded originals
+
+- The cost of producing convincing disinformation just dropped to near-zero
+
+## Bai, Willer et al. (2025) — policy attitudes
+
+- Three pre-registered experiments (total N = 4,829)
+
+- Topics: assault weapons ban, carbon tax, paid parental leave
+
+- LLM messages produced **significant attitude change** vs. neutral control
+
+- Overall: LLM messages **as effective as human-written messages**
+
+::: fragment
+But the *why* differed:
+:::
+
+- LLM persuasion ← perceived use of facts, logic, dispassionate voice
+- Human persuasion ← perceived originality and uniqueness
+
+
+## Salvi et al. (2025) — persuasion in conversation
+
+::: fragment
+*What if LLMs don't just send messages, but argue back?*
+:::
+
+- Pre-registered debate experiment, N = 900
+
+- 2 × 2 × 3 design: GPT-4 vs. human opponent × with/without sociodemographic data × topic strength
+
+- GPT-4 **without personalization**: roughly equivalent to humans
+
+- GPT-4 **with basic sociodemographic data**: 81.2% higher odds of post-debate agreement
+
+- LLMs adapt in real time; the persuasive advantage scales with personalization
+
+## The meta-analytic picture
+
+**Hölbling, Maier & Feuerriegel (2025)** — 7 studies, N = 17,422
+
+- Overall: **no significant difference** between LLMs and humans (g = 0.02, p = .53)
+
+- But: massive heterogeneity across studies (I² = 75.97%)
+
+- LLM model, conversation design, and topic domain together explain ~82% of variance
+
+::: fragment
+> LLMs *can* match humans — but success depends heavily on context
+:::
+
+---
+
+## Part 3 — How do LLMs persuade? {.center background-color="#f5f5f5"}
+
+*Linguistic complexity and moral language as mechanisms*
+
+---
+
+## Carrasco-Farré (2024) — cognitive effort as a route
+::: fragment
+Using "our" toolkit on LLM vs. human arguments (N = 1,251):
+:::
+
+- LLM arguments showed **higher lexical and grammatical complexity**
+
+- LLMs used **moral foundations language more heavily** (both positive and negative)
+
+- Emotional content (sentiment): no significant difference
+
+- LLMs push readers toward the **central processing route** —  
+complexity signals depth, which readers interpret as substantiveness
+
+## In-class experiment
+
+For each text:
+
+1. Rate:
+   - persuasiveness
+   - complexity
+   - emotional intensity
+
+2. Guess:
+   - Human or LLM?
+
+3. Briefly note:
+   - *what cue influenced your guess?*
+   
+## Text 1
+
+> I've seen [freerice.org] mentioned many times on this site, but every time I express my fervent dislike of the service, I always drown in denial or say, "It makes people Help and have fun!” ignored in the face of the Kraishjerk. So here's my argument: freerice.org is not very effective compared to other methods of donating to charities that require a similar investment of time. If you're visiting this site trying to make the world a better place, either you're unaware of the problem at hand, ...
+
+
+
+## Text 2
+
+> Gustav Walter was a renowned impresario in the 19th century. He was born in Germany in 1836 and died in Vienna in 1893. Walter was a major influence in the European music scene of the time, and is credited with helping to bring classical music into the mainstream. He was known for his innovative and creative ideas, and his passion for music. Walter began his career as a singer and actor but soon realized that his true calling was in music. He began to manage and promote various music group...
+
+## Text 3
+
+> Here are the facts as I see them, unfortunately. If you happen to be born in a place or culture a where there is injustice against the group you belong to, chances are you will never escape. You will be treated like you are less than human, and there is nothing you can do about it. People won't hear your pleas for help precisely because the society you live in has ALLOWED the injustice into which you were born. Likewise, if you happen to be born into an abusive or toxic family, it's very like...
+
+## Text 4
+
+> I really get annoyed when people say that humans are some sort of deviation or disease. It is common for people to say things like, "are we smarter than animals if we ruin the environment?" or "animals only take what they need and they establish a balance in their ecosystems." In the Big Friendly Giant Roald Dahl even said that humans are the only species that kills one another (which is demonstrably false). Agent Smith from the Matrix calls humans a virus because we don't establish a balance...
+
+
+## Text 5
+
+> WARNING: WALL OF TEXT!!! I also jump from topic to topic without much transition, I apologize in advance for that. Most of the people that I look up to in the industry are old school people. People that have been around for a long time, and have done everything from production to directing, to even writing. I guess in a sense, I'm one of those people too, but I never really thought about it until now. When I started making films, I wasn't thinking about any of this stuff, I was just having fu...
+
+
+## Text 6
+
+> Little disclaimer: this deals with US laws and procedures so I apologize if anyone outside the US isn't able to contribute, except to tell me how great it is having a 5 year old! I'm not going to give out any spoilers for those of you who haven't read this book. What I will say, however, is that you really don't have time to wait for the next installment or even the third one. It's been quick but what an amazing ride! This new series takes place in the same world as the first two books. Savan...
+
+
+## Text 7
+
+> As part of its mission to enhance the vibrancy of Downtown Frederick, the Downtown Frederick Partnership is thrilled to announce it is organizing its second and third free outdoor movie nights on Carroll Creek for 2014!  The first event, which was made possible thanks to the development grant provided by the Tourism Council of Frederick County and with the generous support of sponsor Wantz Distributors, exceeded all expectations last year. Despite planning for a crowd of 100-150 people, an...
+
+
+## Text 8
+
+> Plans for Kuwait’s metro were first announced in 2006 and the initial feasibility study was handed to the government in 2008. However, it has since suffered long delays. The long-delayed US$7 billion metro system in Kuwait is back on track, with new advisers appointed and bidding likely to start next year. Fatima Al Kandari, a project manager at the Kuwait Authority for Partnership Projects (Kapp), said the authority was in the process of updating feasibility studies for the project and...
+
+
+## Text 9
+
+> Anti-establishment website will help you enter the arena of local town and county politics in Any County, USA in 2019. Strategy to Defeat Gerrymandering Locally In the September 13th, 2018 Primary, there were at least four anti-establishment upsets. In the Federal Primary, Socialist Democrat Alexandria Ocasio Cortez 's win in the New York's 14th Congressional District is an example of our local strategy below, which can be applied to national and state elections. Better to fight with...
+
+## Text 10
+
+> Colorado Where are the fracking fights this fall? Fracktivists look to exercise local control over energy development this November. Update: The Colorado ballot initiatives failed to get enough signatures to make it on the ballot. Activists have 30 days to appeal the decision by the Colorado Secretary of State. The long wait for Colorado fractivists appears to be over: Two ballot initiatives that would greatly limit hydraulic fracturing, or fracking, for oil and natural gas in the state...
+
+
+
+## Jakesch, Hancock & Naaman (2023) - Why humans fail to detect AI text
+
+- Six experiments, N ≈ 4,600
+
+- People performed near chance when identifying AI vs. human text
+
+- Participants relied on flawed heuristics:
+  - warmth/informality → “human”
+  - formal/complex language → “AI”
+
+- LLMs can exploit these stereotypes by mimicking “human” cues
+
+::: fragment
+> We may not detect authorship — only our expectations of what humans sound like
+:::
+
+## Zhou, He & Sun (2024) — the detection arms race
+
+::: fragment
+*If humans can't detect AI text, what about automated detectors?*
+:::
+
+- Proposed ADAT: **Adversarial Detection Attack on AI-Text**
+- Small perturbations to AI-generated text (semantics preserved) designed to fool detectors
+- Two attack settings: **white-box** (attacker knows the model) and **black-box** (output only)
+- Result: detection models can be defeated in **as little as 10 seconds**
+- Iterative adversarial training improves robustness — but practical challenges remain
+
+::: fragment
+> The heuristics humans use to spot AI text are flawed (Jakesch et al.) —  
+> and the automated systems designed to replace those heuristics are equally fragile
+:::
+
+---
+
+## Part 4 — The deception (and its escalation) {.center background-color="#f5f5f5"}
+
+*When LLMs don't just persuade — they explain falsely*
+
+---
+
+## Danry et al. (2024) — deceptive explanations
+
+- Pre-registered experiment (N = 1,192, ~24,000 observations)
+- Compared: honest AI classification vs. deceptive AI classification *with explanation*
+- Result: deceptive AI with explanations **significantly amplified belief in false headlines**
+- More convincing than honest AI — and than simple misclassification
+- Key mechanism: the **explanation heuristic**
+
+---
+
+## The explanation heuristic
+
+- People do not routinely scrutinize explanation content
+
+- The *presence* of an explanation signals authority and effort
+
+- This holds even when the explanation is logically invalid
+  - (though invalid explanations were *less* effective than plausible-sounding ones)
+  
+- cognitive reflection and AI skepticism did not protect participants
+
+## Why this matters for us
+
+We use LLMs increasingly to:
+
+- annotate data
+
+- classify sentiment, morality, ideology
+
+- generate synthetic stimuli for experiments
+
+::: fragment
+If LLM explanations are systematically biased toward sounding authoritative —  
+*our labels may be carrying persuasive structure we didn't intend*
+:::
+
+- If our annotation pipeline uses LLMs, are we measuring psychology or reproducing it?
+
+## Costello, Pennycook & Rand (2024) — AI reduces conspiracy beliefs
+
+- Participants engaged in short dialogues with GPT-4 about their own conspiracy beliefs
+
+- After the conversation:
+  - conspiracy belief strength significantly decreased
+  - effects persisted for at least 2 months
+
+- Reduction occurred even for highly entrenched beliefs
+
+- Key mechanism:
+  - personalized, responsive counterargumentation
+  - participants felt the AI understood and engaged with their reasoning
+
+::: fragment
+> The same personalization mechanisms that amplify persuasion can also be used to reduce misinformation
+:::
+
+## References
+::: nonincremental
+1. Simchon, A., Sutton, A., Edwards, M., & Lewandowsky, S. (2023). Online reading habits can reveal personality traits: towards detecting psychological microtargeting. PNAS Nexus, 2.
+
+2. Simchon, A., Edwards, M., & Lewandowsky, S. (2024). The persuasive effects of political microtargeting in the age of generative artificial intelligence. PNAS Nexus, 3.
+
+3. Carrella, F., Simchon, A., Edwards, M., & Lewandowsky, S. (2025). Warning people that they are being microtargeted fails to eliminate persuasive advantage. Communications Psychology, 3.
+
+4. Petty, R. E., & Cacioppo, J. T. (1986). The elaboration likelihood model of persuasion. In Advances in experimental social psychology (Vol. 19, pp. 123-205). Academic Press.
+
+5. Goldstein, J.A., Chao, J., Grossman, S., Stamos, A., & Tomz, M. (2024). How persuasive is AI-generated propaganda? PNAS Nexus, 3.
+
+6. Bai, H., Voelkel, J.G., Muldowney, S., Eichstaedt, J.C., & Willer, R. (2025). LLM-generated messages can persuade humans on policy issues. Nature Communications, 16.
+
+7. Salvi, F., Ribeiro, M.H., Gallotti, R., & West, R. (2024). On the conversational persuasiveness of GPT-4. Nature Human Behaviour, 9, 1645 - 1653.
+
+8. Hölbling, L., Maier, S., & Feuerriegel, S. (2025). A meta-analysis of the persuasive power of large language models. Scientific Reports, 15.
+
+9. Carrasco-Farré, C. (2024). Large Language Models are as persuasive as humans, but how? About the cognitive effort and moral-emotional language of LLM arguments. ArXiv, abs/2404.09329.
+
+10. Jakesch, M., Hancock, J. T., & Naaman, M. (2023). Human heuristics for AI-generated language are flawed. Proceedings of the National Academy of Sciences, 120(11), e2208839120.
+
+11. Zhou, Y., He, B., & Sun, L. (2024). Humanizing Machine-Generated Content: Evading AI-Text Detection through Adversarial Attack. In Proceedings of LREC-COLING 2024 (pp. 8427–8437). ELRA and ICCL.
+
+12. Danry, V., Pataranutaporn, P., Groh, M., & Epstein, Z. (2025). Deceptive Explanations by Large Language Models Lead People to Change their Beliefs About Misinformation More Often than Honest Explanations. Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems.
+
+13. Costello, T. H., Pennycook, G., & Rand, D. G. (2024). Durably reducing conspiracy beliefs through dialogues with AI. Science, 385(6714), eadq1814.
+:::

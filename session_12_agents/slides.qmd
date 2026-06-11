@@ -1,0 +1,231 @@
+---
+title: "MO850 – Tópicos Avançados em Ciência da Computação I"
+format:
+  revealjs:
+    scrollable: true
+    incremental: true
+    width: 1500
+editor: visual
+execute:
+  echo: true
+  eval: false
+---
+
+## What We've Been Doing
+
+::: incremental
+-   Last session: LLMs can generate a "manipulation" machine:
+    -   Personality inferred from what you write/read
+    -   Messages generated to match your vulnerabilities
+    -   Warnings don't protect you
+:::
+
+::: fragment
+> "If an LLM can persuade one person, what happens when you deploy many of them, inside a real social environment?"
+:::
+
+## Part 1 — Can an LLM be a person? {.center background-color="#f5f5f5"}
+
+## Park et al. (2023) — Generative Agents
+
+-   25 LLM agents in a Sims-like sandbox: ["Smallville"](https://reverie.herokuapp.com/UIST_Demo/)
+
+-   Each agent has: memory stream (natural language log), reflection layer (periodic summaries), planning module (goal-based scheduling)
+
+-   Agents autonomously plan days, form relationships, spread news, coordinate events
+
+-   Assigning one agent the goal "throw a party" → spontaneous coordination across all 25
+
+-   Key result: believable, internally consistent social behavior emerges from the architecture alone
+
+------------------------------------------------------------------------
+
+## Park et al. (2024) — 1,000 real people
+
+-   1,052 participants completed qualitative interviews about their lives (demographics, opinions, experiences)
+-   Each interview was used to seed a generative agent
+-   Agents were then asked to answer attitude surveys, psychological scales, and classic social science experiments
+
+::: fragment
+Result: agents replicated participants' General Social Survey responses with \~85% accuracy
+:::
+
+## Part 2 — Can an LLM change a person's mind? {.center background-color="#f5f5f5"}
+
+## DebunkBot — Costello, Pennycook & Rand (2024)
+
+-   Participants shared a conspiracy theory they found credible, plus their supporting evidence
+-   [DebunkBot (GPT-4 Turbo)](https://debunkbot.com/survey/_/home/) engaged them in a personalized multi-turn dialogue:
+    -   Acknowledged their reasoning
+    -   Provided tailored factual counterarguments
+    -   Remained persistently polite and non-confrontational
+
+::: fragment
+Results:
+:::
+
+-   Conspiracy belief reduced by \~20% on average
+-   Effects held even for beliefs "deeply entrenched and important to identity"
+-   Reductions persisted for at least 2 months without further contact
+
+------------------------------------------------------------------------
+
+## Why DebunkBot works (and why it matters)
+
+-   Conspiracies are idiosyncratic
+-   The bot remained patient and non-adversarial
+-   It exploited the same personalization logic as microtargeting (and ERI)
+-   From mass persuasion to mass intervention
+
+::: fragment
+> "You could imagine going to conspiracy forums and inviting people to do their own research by debating the chatbot" — Rand (2024)
+:::
+
+------------------------------------------------------------------------
+
+## Zhong et al. (2025) — Bots in climate denialism communities
+
+-   Two Reddit communities focused on climate change denialism
+-   Used a combination of manual and LLM-generated messages as replies to posts
+-   Key design: insider language —\> messages framed using the community's own vocabulary and logic
+-   Bots were ""transparently"" labeled as AI accounts
+
+::: fragment
+Results:
+:::
+
+-   Evidence-based messages with neutral tone → positive engagement, open discussion among deniers
+-   Climate change supporters responded by adding their own evidence
+-   But: adversarial responses, account bans, and community resistance also observed
+
+------------------------------------------------------------------------
+
+## Part 3 — Can LLMs simulate a community? {.center background-color="#f5f5f5"}
+
+## OASIS — Yang et al. (2024)
+
+-   Open Agent Social Interaction Simulation
+-   A generalizable, scalable social media simulator (up to 1 million LLM agents)
+-   Designed around real platform architecture:
+
+::: fragment
+Five components:
+:::
+
+-   Environment Server: tracks posts, users, social graph
+-   RecSys: recommends content (by interest, connections, or hot score just like real platforms)
+-   Agent Module: each agent has a character description + action space (post, comment, follow, like)
+-   Time Engine: activates agents at realistic intervals
+-   Scalable Inferencer: parallelizes LLM calls at scale
+
+------------------------------------------------------------------------
+
+## OASIS — what it can simulate
+
+-   Information spreading (how a post diffuses through the network)
+-   Group polarization (how opinions cluster over time)
+-   Herd effects (cascading engagement)
+-   Larger agent groups → stronger group dynamics and more diverse opinion space
+
+::: fragment
+> OASIS is a laboratory for studying social phenomena that would be unethical, expensive, or impossible to run on real users
+:::
+
+------------------------------------------------------------------------
+
+## From simulation to real deployment
+
+```         
+Real platform data
+       ↓
+  Profile agents (text → DDR/CCR/topic models → persona)
+       ↓
+  Run OASIS simulation: what happens if we inject X?
+       ↓
+  Observe emergent dynamics (polarization, spread, correction)
+       ↓
+  Design intervention
+       ↓
+  Deploy carefully (with ethics board, consent, etc.)
+       ↓
+  Measure in the wild
+```
+
+------------------------------------------------------------------------
+
+## The antivax case study
+
+-   “Homogeneous” community of 1500 LLM-based antivax agents
+
+-   1% provax “bots”:
+
+    -   Generic provax bots
+    -   Targeting (ERI) bots
+
+-   "Control" conditions replicated real-life online dynamics
+
+-   Community-level interventions using LLM agents show positive results:
+
+    -   Agents’ comments increase both popularity of posters and virality of posts.
+    -   Both ERI and generic bots reduce user influence within the network
+    -   Only ERI bots effectively reduce post virality and counteract the “agent effect.”
+
+-   Reception challenges persist
+
+    -   ERI comments are more accepted than generic ones.
+
+-   OASIS-style simulations allowed to test alternative moderating solutions
+
+-   Feasibility is hard, but not impossible
+
+------------------------------------------------------------------------
+
+## Part 4 — Trade-offs and ethics {.center background-color="#f5f5f5"}
+
+## Methodological trade-offs
+
+Pros of LLM-based generative agent modelling
+
+-   Scale and speed: simulate effects before real deployment
+-   Controllability: vary one factor at a time
+-   Access: study populations and platforms that don't give API access
+-   Cost: much cheaper than large-scale human experiments
+
+::: fragment
+Cons
+
+-   Validity: do LLM agents actually behave like humans? (Park et al.: \~85%, but on surveys, not behavior)
+-   Bias: agents inherit training data biases; may overrepresent some populations
+-   Circularity: if we train on human data to simulate humans, are we measuring psychology or reproducing it?
+-   Opacity: emergent dynamics in OASIS may not map to real-world dynamics
+:::
+
+------------------------------------------------------------------------
+
+## The 2×2 of deployment intent
+
+|   | Beneficial intent | Harmful intent |
+|------------------------|------------------------|------------------------|
+| Individual/dyadic | DebunkBot: correct conspiracy via dialogue | Salvi et al.: personalized persuasion at 81% higher odds |
+| Population/systemic | Vaccine hesitancy policy simulation | Coordinated antivax bots; election interference |
+
+::: fragment
+All four cells use the same underlying infrastructure:
+
+-   Persona construction from text
+-   Personalized language generation
+:::
+
+## References
+
+::: nonincremental
+1.  Park, J. S., O'Brien, J. C., Cai, C. J., Morris, M. R., Liang, P., & Bernstein, M. S. (2023). Generative agents: Interactive simulacra of human behavior. UIST '23.
+
+2.  Park, J. S., Popowski, L., Cai, C. J., Morris, M. R., Liang, P., & Bernstein, M. S. (2024). Generative agent simulations of 1,000 people. arXiv:2411.10109.
+
+3.  Costello, T. H., Pennycook, G., & Rand, D. G. (2024). Durably reducing conspiracy beliefs through dialogues with AI. Science, 385(6714), eadq1814.
+
+4.  Yang, Z., et al. (2024). OASIS: Open agent social interaction simulations with one million agents. arXiv:2411.11581.
+
+5.  Zhong, R., Phadke, S., Goldberg, B., & Mitra, T. (2025). Towards designing social interventions for online climate change denialism discussions. Proceedings of the ACM on Human-Computer Interaction (CSCW). https://doi.org/10.1145/3757432
+:::

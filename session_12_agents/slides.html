@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="slides_files/libs/clipboard/clipboard.min.js"></script>
+<script src="slides_files/libs/quarto-html/tabby.min.js"></script>
+<script src="slides_files/libs/quarto-html/popper.min.js"></script>
+<script src="slides_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="slides_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="slides_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="slides_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.42">
+
+  <title>MO850 – Tópicos Avançados em Ciência da Computação I</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="slides_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="slides_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="slides_files/libs/revealjs/dist/theme/quarto-2f366650f320edcfcf53d73c80250a32.css">
+  <link href="slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="slides_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="slides_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="slides_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">MO850 – Tópicos Avançados em Ciência da Computação I</h1>
+
+<div class="quarto-title-authors">
+</div>
+
+</section>
+<section id="what-weve-been-doing" class="slide level2">
+<h2>What We’ve Been Doing</h2>
+<div>
+<ul>
+<li class="fragment">Last session: LLMs can generate a “manipulation” machine:
+<ul>
+<li class="fragment">Personality inferred from what you write/read</li>
+<li class="fragment">Messages generated to match your vulnerabilities</li>
+<li class="fragment">Warnings don’t protect you</li>
+</ul></li>
+</ul>
+</div>
+<div class="fragment">
+<blockquote>
+<p>“If an LLM can persuade one person, what happens when you deploy many of them, inside a real social environment?”</p>
+</blockquote>
+</div>
+</section>
+<section id="part-1-can-an-llm-be-a-person" class="slide level2 center" data-background-color="#f5f5f5">
+<h2>Part 1 — Can an LLM be a person?</h2>
+</section>
+<section id="park-et-al.-2023-generative-agents" class="slide level2">
+<h2>Park et al.&nbsp;(2023) — Generative Agents</h2>
+<ul>
+<li class="fragment"><p>25 LLM agents in a Sims-like sandbox: <a href="https://reverie.herokuapp.com/UIST_Demo/">“Smallville”</a></p></li>
+<li class="fragment"><p>Each agent has: memory stream (natural language log), reflection layer (periodic summaries), planning module (goal-based scheduling)</p></li>
+<li class="fragment"><p>Agents autonomously plan days, form relationships, spread news, coordinate events</p></li>
+<li class="fragment"><p>Assigning one agent the goal “throw a party” → spontaneous coordination across all 25</p></li>
+<li class="fragment"><p>Key result: believable, internally consistent social behavior emerges from the architecture alone</p></li>
+</ul>
+</section>
+<section id="park-et-al.-2024-1000-real-people" class="slide level2">
+<h2>Park et al.&nbsp;(2024) — 1,000 real people</h2>
+<ul>
+<li class="fragment">1,052 participants completed qualitative interviews about their lives (demographics, opinions, experiences)</li>
+<li class="fragment">Each interview was used to seed a generative agent</li>
+<li class="fragment">Agents were then asked to answer attitude surveys, psychological scales, and classic social science experiments</li>
+</ul>
+<div class="fragment">
+<p>Result: agents replicated participants’ General Social Survey responses with ~85% accuracy</p>
+</div>
+</section>
+<section id="part-2-can-an-llm-change-a-persons-mind" class="slide level2 center" data-background-color="#f5f5f5">
+<h2>Part 2 — Can an LLM change a person’s mind?</h2>
+</section>
+<section id="debunkbot-costello-pennycook-rand-2024" class="slide level2">
+<h2>DebunkBot — Costello, Pennycook &amp; Rand (2024)</h2>
+<ul>
+<li class="fragment">Participants shared a conspiracy theory they found credible, plus their supporting evidence</li>
+<li class="fragment"><a href="https://debunkbot.com/survey/_/home/">DebunkBot (GPT-4 Turbo)</a> engaged them in a personalized multi-turn dialogue:
+<ul>
+<li class="fragment">Acknowledged their reasoning</li>
+<li class="fragment">Provided tailored factual counterarguments</li>
+<li class="fragment">Remained persistently polite and non-confrontational</li>
+</ul></li>
+</ul>
+<div class="fragment">
+<p>Results:</p>
+</div>
+<ul>
+<li class="fragment">Conspiracy belief reduced by ~20% on average</li>
+<li class="fragment">Effects held even for beliefs “deeply entrenched and important to identity”</li>
+<li class="fragment">Reductions persisted for at least 2 months without further contact</li>
+</ul>
+</section>
+<section id="why-debunkbot-works-and-why-it-matters" class="slide level2">
+<h2>Why DebunkBot works (and why it matters)</h2>
+<ul>
+<li class="fragment">Conspiracies are idiosyncratic</li>
+<li class="fragment">The bot remained patient and non-adversarial</li>
+<li class="fragment">It exploited the same personalization logic as microtargeting (and ERI)</li>
+<li class="fragment">From mass persuasion to mass intervention</li>
+</ul>
+<div class="fragment">
+<blockquote>
+<p>“You could imagine going to conspiracy forums and inviting people to do their own research by debating the chatbot” — Rand (2024)</p>
+</blockquote>
+</div>
+</section>
+<section id="zhong-et-al.-2025-bots-in-climate-denialism-communities" class="slide level2">
+<h2>Zhong et al.&nbsp;(2025) — Bots in climate denialism communities</h2>
+<ul>
+<li class="fragment">Two Reddit communities focused on climate change denialism</li>
+<li class="fragment">Used a combination of manual and LLM-generated messages as replies to posts</li>
+<li class="fragment">Key design: insider language —&gt; messages framed using the community’s own vocabulary and logic</li>
+<li class="fragment">Bots were ““transparently”” labeled as AI accounts</li>
+</ul>
+<div class="fragment">
+<p>Results:</p>
+</div>
+<ul>
+<li class="fragment">Evidence-based messages with neutral tone → positive engagement, open discussion among deniers</li>
+<li class="fragment">Climate change supporters responded by adding their own evidence</li>
+<li class="fragment">But: adversarial responses, account bans, and community resistance also observed</li>
+</ul>
+</section>
+<section id="part-3-can-llms-simulate-a-community" class="slide level2 center" data-background-color="#f5f5f5">
+<h2>Part 3 — Can LLMs simulate a community?</h2>
+</section>
+<section id="oasis-yang-et-al.-2024" class="slide level2">
+<h2>OASIS — Yang et al.&nbsp;(2024)</h2>
+<ul>
+<li class="fragment">Open Agent Social Interaction Simulation</li>
+<li class="fragment">A generalizable, scalable social media simulator (up to 1 million LLM agents)</li>
+<li class="fragment">Designed around real platform architecture:</li>
+</ul>
+<div class="fragment">
+<p>Five components:</p>
+</div>
+<ul>
+<li class="fragment">Environment Server: tracks posts, users, social graph</li>
+<li class="fragment">RecSys: recommends content (by interest, connections, or hot score just like real platforms)</li>
+<li class="fragment">Agent Module: each agent has a character description + action space (post, comment, follow, like)</li>
+<li class="fragment">Time Engine: activates agents at realistic intervals</li>
+<li class="fragment">Scalable Inferencer: parallelizes LLM calls at scale</li>
+</ul>
+</section>
+<section id="oasis-what-it-can-simulate" class="slide level2">
+<h2>OASIS — what it can simulate</h2>
+<ul>
+<li class="fragment">Information spreading (how a post diffuses through the network)</li>
+<li class="fragment">Group polarization (how opinions cluster over time)</li>
+<li class="fragment">Herd effects (cascading engagement)</li>
+<li class="fragment">Larger agent groups → stronger group dynamics and more diverse opinion space</li>
+</ul>
+<div class="fragment">
+<blockquote>
+<p>OASIS is a laboratory for studying social phenomena that would be unethical, expensive, or impossible to run on real users</p>
+</blockquote>
+</div>
+</section>
+<section id="from-simulation-to-real-deployment" class="slide level2">
+<h2>From simulation to real deployment</h2>
+<pre><code>Real platform data
+       ↓
+  Profile agents (text → DDR/CCR/topic models → persona)
+       ↓
+  Run OASIS simulation: what happens if we inject X?
+       ↓
+  Observe emergent dynamics (polarization, spread, correction)
+       ↓
+  Design intervention
+       ↓
+  Deploy carefully (with ethics board, consent, etc.)
+       ↓
+  Measure in the wild</code></pre>
+</section>
+<section id="the-antivax-case-study" class="slide level2">
+<h2>The antivax case study</h2>
+<ul>
+<li class="fragment"><p>“Homogeneous” community of 1500 LLM-based antivax agents</p></li>
+<li class="fragment"><p>1% provax “bots”:</p>
+<ul>
+<li class="fragment">Generic provax bots</li>
+<li class="fragment">Targeting (ERI) bots</li>
+</ul></li>
+<li class="fragment"><p>“Control” conditions replicated real-life online dynamics</p></li>
+<li class="fragment"><p>Community-level interventions using LLM agents show positive results:</p>
+<ul>
+<li class="fragment">Agents’ comments increase both popularity of posters and virality of posts.</li>
+<li class="fragment">Both ERI and generic bots reduce user influence within the network</li>
+<li class="fragment">Only ERI bots effectively reduce post virality and counteract the “agent effect.”</li>
+</ul></li>
+<li class="fragment"><p>Reception challenges persist</p>
+<ul>
+<li class="fragment">ERI comments are more accepted than generic ones.</li>
+</ul></li>
+<li class="fragment"><p>OASIS-style simulations allowed to test alternative moderating solutions</p></li>
+<li class="fragment"><p>Feasibility is hard, but not impossible</p></li>
+</ul>
+</section>
+<section id="part-4-trade-offs-and-ethics" class="slide level2 center" data-background-color="#f5f5f5">
+<h2>Part 4 — Trade-offs and ethics</h2>
+</section>
+<section id="methodological-trade-offs" class="slide level2">
+<h2>Methodological trade-offs</h2>
+<p>Pros of LLM-based generative agent modelling</p>
+<ul>
+<li class="fragment">Scale and speed: simulate effects before real deployment</li>
+<li class="fragment">Controllability: vary one factor at a time</li>
+<li class="fragment">Access: study populations and platforms that don’t give API access</li>
+<li class="fragment">Cost: much cheaper than large-scale human experiments</li>
+</ul>
+<div class="fragment">
+<p>Cons</p>
+<ul>
+<li class="fragment">Validity: do LLM agents actually behave like humans? (Park et al.: ~85%, but on surveys, not behavior)</li>
+<li class="fragment">Bias: agents inherit training data biases; may overrepresent some populations</li>
+<li class="fragment">Circularity: if we train on human data to simulate humans, are we measuring psychology or reproducing it?</li>
+<li class="fragment">Opacity: emergent dynamics in OASIS may not map to real-world dynamics</li>
+</ul>
+</div>
+</section>
+<section id="the-22-of-deployment-intent" class="slide level2">
+<h2>The 2×2 of deployment intent</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Beneficial intent</th>
+<th>Harmful intent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Individual/dyadic</td>
+<td>DebunkBot: correct conspiracy via dialogue</td>
+<td>Salvi et al.: personalized persuasion at 81% higher odds</td>
+</tr>
+<tr class="even">
+<td>Population/systemic</td>
+<td>Vaccine hesitancy policy simulation</td>
+<td>Coordinated antivax bots; election interference</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p>All four cells use the same underlying infrastructure:</p>
+<ul>
+<li class="fragment">Persona construction from text</li>
+<li class="fragment">Personalized language generation</li>
+</ul>
+</div>
+</section>
+<section id="references" class="slide level2 scrollable">
+<h2>References</h2>
+<div>
+<ol type="1">
+<li><p>Park, J. S., O’Brien, J. C., Cai, C. J., Morris, M. R., Liang, P., &amp; Bernstein, M. S. (2023). Generative agents: Interactive simulacra of human behavior. UIST ’23.</p></li>
+<li><p>Park, J. S., Popowski, L., Cai, C. J., Morris, M. R., Liang, P., &amp; Bernstein, M. S. (2024). Generative agent simulations of 1,000 people. arXiv:2411.10109.</p></li>
+<li><p>Costello, T. H., Pennycook, G., &amp; Rand, D. G. (2024). Durably reducing conspiracy beliefs through dialogues with AI. Science, 385(6714), eadq1814.</p></li>
+<li><p>Yang, Z., et al.&nbsp;(2024). OASIS: Open agent social interaction simulations with one million agents. arXiv:2411.11581.</p></li>
+<li><p>Zhong, R., Phadke, S., Goldberg, B., &amp; Mitra, T. (2025). Towards designing social interventions for online climate change denialism discussions. Proceedings of the ACM on Human-Computer Interaction (CSCW). https://doi.org/10.1145/3757432</p></li>
+</ol>
+</div>
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="slides_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="slides_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="slides_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="slides_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="slides_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="slides_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="slides_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="slides_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="slides_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1500,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>
